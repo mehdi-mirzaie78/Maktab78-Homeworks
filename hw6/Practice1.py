@@ -45,9 +45,22 @@ class Matrix:
             else:
                 self.matrix = temp.copy()
 
+    def transpose(self):
+        temp = []
+        for j in range(self.column):
+            temp.append([self.matrix[i][j] for i in range(self.row)])
+        else:
+            self.matrix = temp.copy()
+            self.row, self.column = self.column, self.row
+
 
 mat1 = Matrix(2, 3)
 print(mat1)
 print(mat1.__repr__())
 mat1.set_values(2, 3)
-print(mat1)
+for i in range(mat1.row):
+    print(mat1.matrix[i])
+mat1.transpose()
+print('_________________')
+for i in range(mat1.row):
+    print(mat1.matrix[i])
