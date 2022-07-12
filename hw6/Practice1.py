@@ -28,7 +28,12 @@ class Matrix:
         return f"{self.matrix}"
 
     def __repr__(self) -> str:
-        return f'This is a matrix class: {self.matrix}'
+        return f'This is a matrix class: {self.matrix} ' \
+               f'It has {self.row} rows and {self.column} columns'
+
+    def __len__(self) -> int:
+        """ Returns the product of number of rows and number of column"""
+        return self.row * self.column
 
     def set_values(self, row: int, col: int) -> None:
         """
@@ -45,7 +50,12 @@ class Matrix:
             else:
                 self.matrix = temp.copy()
 
-    def transpose(self):
+    def transpose(self) -> None:
+        """
+        ---------------- transpose ----------------
+        Converts a matrix with m rows and n column
+        to a matrix with n rows and m columns
+        """
         temp = []
         for j in range(self.column):
             temp.append([self.matrix[i][j] for i in range(self.row)])
@@ -60,7 +70,12 @@ print(mat1.__repr__())
 mat1.set_values(2, 3)
 for i in range(mat1.row):
     print(mat1.matrix[i])
+
+print(f'len mat: {len(mat1)}')
 mat1.transpose()
+
 print('_________________')
 for i in range(mat1.row):
     print(mat1.matrix[i])
+print(mat1)
+print(f'len mat: {len(mat1)}')
