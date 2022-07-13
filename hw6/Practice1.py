@@ -232,8 +232,8 @@ class SquareMatrix(Matrix):
                 main *= i
             for j in self.sub_diameter().values():
                 sub *= j
-
             return main - sub
+
         elif self.row == 3:
             m = self.matrix
             ans = m[0][0] * ((m[1][1] * m[2][2]) - (m[1][2] * m[2][1]))
@@ -288,5 +288,5 @@ square.show()
 print("Main diameter:", square.main_diameter())
 print("Sub diameter:", square.sub_diameter())
 print("Det:", square.det())
-print(help(Matrix))
+# print(help(Matrix))
 # I did the best I could. Hope you like it
