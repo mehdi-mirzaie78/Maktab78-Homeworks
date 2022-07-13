@@ -62,7 +62,7 @@ class Matrix:
         """Returns one member of matrix with given indexes"""
         return self.matrix[index1][index2]
 
-    def __add__(self, other: "Matrix") -> "Matrix":
+    def __add__(self, other: "Matrix") -> "Matrix.matrix":
         """
         ---------------------- add -----------------------
         1: Validating the number of rows and columns.
@@ -80,6 +80,19 @@ class Matrix:
             return result
         else:
             raise ValueError("Number of rows or columns or both are wrong!")
+
+    def __sub__(self, other: "Matrix") -> "Matrix.matrix":
+        """
+            ---------------------- sub -----------------------
+            1: multiplying -1 to the second matrix
+            2: calling add for adding first matrix and second
+        """
+
+        temp = []
+        for i in range(self.row):
+            temp.append([other.matrix[i][j] * -1 for j in range(self.column)])
+        other.matrix = temp.copy()
+        return self.__add__(other)
 
     def show(self) -> None:
         """Shows matrix in the right format"""
@@ -125,5 +138,8 @@ mat1.show()
 print('------')
 mat2.show()
 mat3 = mat1 + mat2
-print('------')
+print('---add---')
+mat3.show()
+print('---sub---')
+mat3 = mat1 - mat2
 mat3.show()
