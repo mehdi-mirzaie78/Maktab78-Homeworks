@@ -19,10 +19,24 @@ class Matrix:
 
         self.row = row
         self.column = column
-        self.matrix = []
+        temp = []
         for i in range(self.row):
             lst = [None for _ in range(self.column)]
-            self.matrix.append(lst)
+            temp.append(lst)
+        self.matrix = temp.copy()
+
+    @property
+    def matrix(self):
+        """matrix.getter"""
+        return self._matrix
+
+    @matrix.setter
+    def matrix(self, value: "Matrix.matrix"):
+        """matrix.setter: validating the number of rows and columns for setting value"""
+        if len(value) == self.row and len(value[0]) == self.column:
+            self._matrix = value
+        else:
+            raise ValueError("The number of rows or columns or both are wrong!")
 
     def __str__(self) -> str:
         return f"{self.matrix}"
@@ -47,6 +61,25 @@ class Matrix:
     def __getitem__(self, index1: int, index2: int) -> float | int:
         """Returns one member of matrix with given indexes"""
         return self.matrix[index1][index2]
+
+    def __add__(self, other: "Matrix") -> "Matrix":
+        """
+        ---------------------- add -----------------------
+        1: Validating the number of rows and columns.
+        2: Creating a Matrix object to store the result
+        of summation
+        3: adding each member of one matrix to another
+        """
+        if self.row == other.row and self.column == other.column:
+            result = Matrix(self.row, self.column)
+            temp = []
+            for i in range(self.row):
+                ls = [self.matrix[i][j] + other.matrix[i][j] for j in range(self.column)]
+                temp.append(ls)
+            result.matrix = temp.copy()
+            return result
+        else:
+            raise ValueError("Number of rows or columns or both are wrong!")
 
     def show(self) -> None:
         """Shows matrix in the right format"""
@@ -82,14 +115,15 @@ class Matrix:
 
 mat1 = Matrix(2, 3)
 mat1.show()
-mat1.matrix = [[-10.5, 20.1, -30], [40, -50, 60]]
-mat1.matrix[0][0] = 100
-print(mat1.matrix[1][1])
+mat1.matrix = [[-10, 20, -30], [40, -50, 60]]
 mat1.show()
 print(abs(mat1))
-print(mat1.__repr__())
-mat1.transpose()
 print('_________________')
+mat2 = Matrix(2, 3)
+mat2.matrix = [[1, 2.5, 3], [4, 5, 6]]
 mat1.show()
-while True:
-    exec(input('Enter: '))
+print('------')
+mat2.show()
+mat3 = mat1 + mat2
+print('------')
+mat3.show()
