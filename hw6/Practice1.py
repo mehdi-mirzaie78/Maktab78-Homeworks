@@ -21,7 +21,7 @@ class Matrix:
         self.column = column
         self.matrix = []
         for i in range(self.row):
-            lst = [None for j in range(self.column)]
+            lst = [None for _ in range(self.column)]
             self.matrix.append(lst)
 
     def __str__(self) -> str:
@@ -35,20 +35,36 @@ class Matrix:
         """ Returns the product of number of rows and number of column"""
         return self.row * self.column
 
-    def set_values(self, row: int, col: int) -> None:
+    def __abs__(self) -> list:
+        """Returns a matrix with absolute value of every member"""
+        result = [list(map(abs, self.matrix[r])) for r in range(self.row)]
+        return result
+
+    def __setitem__(self, index1: int, index2: int, value: float | int) -> None:
+        """Sets the given value for one member of matrix"""
+        self.matrix[index1][index2] = value
+
+    def __getitem__(self, index1: int, index2: int) -> float | int:
+        """Returns one member of matrix with given indexes"""
+        return self.matrix[index1][index2]
+
+    def show(self) -> None:
+        """Shows matrix in the right format"""
+        for i in range(self.row):
+            print(self.matrix[i])
+
+    def set_values(self) -> None:
         """
-        ----------------- set_values -----------------
+        ------------------- set_values --------------------
         sets a float value for each member of Matrix object
         """
-        if self.row != row or self.column != col:
-            raise ValueError("The number of row or column is WRONG!")
+
+        temp = []
+        for i in range(1, self.row + 1):
+            ls = [float(input(f"Enter member{i}{j}: ")) for j in range(1, self.column + 1)]
+            temp.append(ls)
         else:
-            temp = []
-            for i in range(1, row + 1):
-                ls = [float(input(f"Enter member{i}{j}: ")) for j in range(1, col + 1)]
-                temp.append(ls)
-            else:
-                self.matrix = temp.copy()
+            self.matrix = temp.copy()
 
     def transpose(self) -> None:
         """
@@ -65,17 +81,15 @@ class Matrix:
 
 
 mat1 = Matrix(2, 3)
-print(mat1)
+mat1.show()
+mat1.matrix = [[-10.5, 20.1, -30], [40, -50, 60]]
+mat1.matrix[0][0] = 100
+print(mat1.matrix[1][1])
+mat1.show()
+print(abs(mat1))
 print(mat1.__repr__())
-mat1.set_values(2, 3)
-for i in range(mat1.row):
-    print(mat1.matrix[i])
-
-print(f'len mat: {len(mat1)}')
 mat1.transpose()
-
 print('_________________')
-for i in range(mat1.row):
-    print(mat1.matrix[i])
-print(mat1)
-print(f'len mat: {len(mat1)}')
+mat1.show()
+while True:
+    exec(input('Enter: '))
