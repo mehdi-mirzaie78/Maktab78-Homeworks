@@ -143,6 +143,37 @@ class Matrix:
         ans = self.__mul__(other.inverse())
         return ans
 
+    def __eq__(self, other: "Matrix") -> bool:
+        if self.row == other.row and self.column == other.column:
+            lst = []
+            for i in range(self.row):
+                for j in range(self.column):
+                    t = self.matrix[i][j] == other.matrix[i][j]
+                    lst.append(t)
+            return all(lst)
+        else:
+            raise ValueError("Rows and columns aren't match")
+
+    def __ne__(self, other: "Matrix") -> bool:
+        return not(self.__eq__(other))
+
+    def __gt__(self, other: "Matrix") -> bool:
+        s1, s2 = 0, 0
+        for i in range(self.row):
+            s1 += sum(self.matrix[i])
+        for j in range(other.row):
+            s2 += sum(other.matrix[j])
+        return s1 > s2
+
+    def __ge__(self, other: "Matrix") -> bool:
+        return self.__eq__(other) or self.__gt__(other)
+
+    def __lt__(self, other: "Matrix") -> bool:
+        return not(self.__ge__(other))
+
+    def __le__(self, other: "Matrix") -> bool:
+        return not(self.__gt__(other))
+
     def show(self) -> None:
         """Shows matrix in the right format"""
         for i in range(self.row):
@@ -201,4 +232,11 @@ print('---div---')
 m1 = Matrix(2, 2)
 m1.matrix = [[4, 7], [2, 6]]
 mat_same = m1 * m1.inverse()
-
+m2 = Matrix(2, 2)
+m2.matrix = [[4, 8], [2, 6]]
+print(m1 == m2)
+print(m1 != m2)
+print(m1 > m2)
+print(m1 >= m2)
+print(m1 < m2)
+print(m1 <= m2)
