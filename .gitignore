@@ -1,6 +1,8 @@
 *.jpg
 *.png
 *.txt
+*.docx
+*.pdf
 .idea/Maktab78-Homeworks.iml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/misc.xml

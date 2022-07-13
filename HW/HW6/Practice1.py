@@ -134,7 +134,7 @@ class Matrix:
             result.matrix[1][0] = result.matrix[1][0] * -1
             return result
         else:
-            raise ValueError("the matrix is not square matrix")
+            raise ValueError("the matrix is not square matrix or the number of rows is not 2")
 
     def __truediv__(self, other: "Matrix") -> "Matrix":
         """Multiplying first matrix to second matrix.inverse()
