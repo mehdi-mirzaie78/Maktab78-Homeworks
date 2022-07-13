@@ -62,7 +62,7 @@ class Matrix:
         """Returns one member of matrix with given indexes"""
         return self.matrix[index1][index2]
 
-    def __add__(self, other: "Matrix") -> "Matrix.matrix":
+    def __add__(self, other: "Matrix") -> "Matrix":
         """
         ---------------------- add -----------------------
         1: Validating the number of rows and columns.
@@ -77,11 +77,12 @@ class Matrix:
                 ls = [self.matrix[i][j] + other.matrix[i][j] for j in range(self.column)]
                 temp.append(ls)
             result.matrix = temp.copy()
+            result.show()
             return result
         else:
             raise ValueError("Number of rows or columns or both are wrong!")
 
-    def __sub__(self, other: "Matrix") -> "Matrix.matrix":
+    def __sub__(self, other: "Matrix") -> "Matrix":
         """
             ---------------------- sub -----------------------
             1: multiplying -1 to the second matrix
@@ -94,7 +95,7 @@ class Matrix:
         other.matrix = temp.copy()
         return self.__add__(other)
 
-    def __mul__(self, other: "Matrix") -> "Matrix.matrix":
+    def __mul__(self, other: "Matrix") -> "Matrix":
         """
         ---------------------------- mul -----------------------------
         Multiplying each row of first matrix to the column of another matrix
@@ -112,11 +113,34 @@ class Matrix:
                         summation += element
                     else:
                         result.matrix[i][k] = summation
+            result.show()
             return result
 
         else:
             raise ValueError("Number of rows of first matrix doesn't equal to"
                              "number of columns of second matrix")
+
+    def inverse(self) -> "Matrix":
+        """ inverse of a square matrix 2x2"""
+        if self.row == self.column and self.row == 2:
+            det = self.matrix[0][0] * self.matrix[1][1] - \
+                  self.matrix[0][1] * self.matrix[1][0]
+            result = Matrix(2, 2)
+            for i in range(self.row):
+                for j in range(self.column):
+                    result.matrix[i][j] = self.matrix[i][j] / det
+            result.matrix[0][0], result.matrix[1][1] = result.matrix[1][1], result.matrix[0][0]
+            result.matrix[0][1] = result.matrix[0][1] * -1
+            result.matrix[1][0] = result.matrix[1][0] * -1
+            return result
+        else:
+            raise ValueError("the matrix is not square matrix")
+
+    def __truediv__(self, other: "Matrix") -> "Matrix":
+        """Multiplying first matrix to second matrix.inverse()
+        A/B = A * B.inv"""
+        ans = self.__mul__(other.inverse())
+        return ans
 
     def show(self) -> None:
         """Shows matrix in the right format"""
@@ -158,19 +182,22 @@ print(abs(mat1))
 print('_________________')
 mat2 = Matrix(2, 3)
 mat2.matrix = [[1, 2.5, 3], [4, 5, 6]]
+print('mat1: ')
 mat1.show()
-print('------')
+print('mat2: ')
 mat2.show()
-mat3 = mat1 + mat2
 print('---add---')
-mat3.show()
+mat3 = mat1 + mat2
 print('---sub---')
 mat3 = mat1 - mat2
-mat3.show()
 print('---mul---')
 mat1 = Matrix(2, 3)
 mat1.matrix = [[1, 2, 3], [4, 5, 6]]
 mat2 = Matrix(3, 3)
 mat2.matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 mat3 = mat1 * mat2
-mat3.show()
+print('---div---')
+m1 = Matrix(2, 2)
+m1.matrix = [[4, 7], [2, 6]]
+m1 * m1.inverse()
+
