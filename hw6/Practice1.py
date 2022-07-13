@@ -288,3 +288,5 @@ square.show()
 print("Main diameter:", square.main_diameter())
 print("Sub diameter:", square.sub_diameter())
 print("Det:", square.det())
+print(help(Matrix))
+# I did the best I could. Hope you like it
