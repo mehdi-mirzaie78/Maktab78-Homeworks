@@ -94,6 +94,30 @@ class Matrix:
         other.matrix = temp.copy()
         return self.__add__(other)
 
+    def __mul__(self, other: "Matrix") -> "Matrix.matrix":
+        """
+        ---------------------------- mul -----------------------------
+        Multiplying each row of first matrix to the column of another matrix
+        if the number of columns of the first matrix equals to the number
+        of rows of the second matrix.
+        M1(m X n) * M2(n X o) => Res(m X o)
+        """
+        if self.column == other.row:
+            result = Matrix(self.row, other.column)
+            for i in range(self.row):
+                for k in range(other.column):
+                    summation = 0
+                    for j in range(self.column):
+                        element = self.matrix[i][j] * other.matrix[j][k]
+                        summation += element
+                    else:
+                        result.matrix[i][k] = summation
+            return result
+
+        else:
+            raise ValueError("Number of rows of first matrix doesn't equal to"
+                             "number of columns of second matrix")
+
     def show(self) -> None:
         """Shows matrix in the right format"""
         for i in range(self.row):
@@ -142,4 +166,11 @@ print('---add---')
 mat3.show()
 print('---sub---')
 mat3 = mat1 - mat2
+mat3.show()
+print('---mul---')
+mat1 = Matrix(2, 3)
+mat1.matrix = [[1, 2, 3], [4, 5, 6]]
+mat2 = Matrix(3, 3)
+mat2.matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+mat3 = mat1 * mat2
 mat3.show()
