@@ -1,5 +1,4 @@
 # Homework 6
-# Defining a Matrix class
 class Matrix:
     """
     ----------- Matrix class -----------
@@ -155,7 +154,7 @@ class Matrix:
             raise ValueError("Rows and columns aren't match")
 
     def __ne__(self, other: "Matrix") -> bool:
-        return not(self.__eq__(other))
+        return not (self.__eq__(other))
 
     def __gt__(self, other: "Matrix") -> bool:
         s1, s2 = 0, 0
@@ -169,10 +168,10 @@ class Matrix:
         return self.__eq__(other) or self.__gt__(other)
 
     def __lt__(self, other: "Matrix") -> bool:
-        return not(self.__ge__(other))
+        return not (self.__ge__(other))
 
     def __le__(self, other: "Matrix") -> bool:
-        return not(self.__gt__(other))
+        return not (self.__gt__(other))
 
     def show(self) -> None:
         """Shows matrix in the right format"""
@@ -204,6 +203,45 @@ class Matrix:
         else:
             self.matrix = temp.copy()
             self.row, self.column = self.column, self.row
+
+
+class SquareMatrix(Matrix):
+    def __init__(self, row: int) -> None:
+        super().__init__(row, row)
+
+    def main_diameter(self) -> dict:
+        """Returns a dictionary of indexes and elements for main diameter"""
+        dic = {f'M{i}{i}': self.matrix[i][i] for i in range(self.row)}
+        return dic
+
+    def sub_diameter(self) -> dict:
+        """Returns a dictionary of indexes and elements for sub diameter"""
+        dic = {f'M{i}{self.row - 1 - i}': self.matrix[i][self.row - 1 - i] for i in range(self.row)}
+        return dic
+
+    def det(self) -> float | int:
+        """
+        ------------------ det ------------------
+        calculates det of the square matrix
+        for any matrix with this size 2x2 or 3x3
+        """
+        if self.row == 2:
+            main = 1
+            sub = 1
+            for i in self.main_diameter().values():
+                main *= i
+            for j in self.sub_diameter().values():
+                sub *= j
+
+            return main - sub
+        elif self.row == 3:
+            m = self.matrix
+            ans = m[0][0] * ((m[1][1] * m[2][2]) - (m[1][2] * m[2][1]))
+            ans -= m[0][1] * ((m[1][0] * m[2][2]) - (m[1][2] * m[2][0]))
+            ans += m[0][2] * ((m[1][0] * m[2][1]) - (m[1][1] * m[2][0]))
+            return ans
+        else:
+            raise ValueError("I don't know more :) ")
 
 
 mat1 = Matrix(2, 3)
@@ -240,3 +278,13 @@ print(m1 > m2)
 print(m1 >= m2)
 print(m1 < m2)
 print(m1 <= m2)
+
+print('-------------------')
+
+square = SquareMatrix(3)
+square.show()
+square.matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+square.show()
+print("Main diameter:", square.main_diameter())
+print("Sub diameter:", square.sub_diameter())
+print("Det:", square.det())
