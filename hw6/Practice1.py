@@ -113,6 +113,7 @@ class Matrix:
                         summation += element
                     else:
                         result.matrix[i][k] = summation
+            result.matrix = [list(map(round, result.matrix[i])) for i in range(self.row)]
             result.show()
             return result
 
@@ -187,17 +188,17 @@ mat1.show()
 print('mat2: ')
 mat2.show()
 print('---add---')
-mat3 = mat1 + mat2
+mat_add = mat1 + mat2
 print('---sub---')
-mat3 = mat1 - mat2
+mat_sub = mat1 - mat2
 print('---mul---')
 mat1 = Matrix(2, 3)
 mat1.matrix = [[1, 2, 3], [4, 5, 6]]
 mat2 = Matrix(3, 3)
 mat2.matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-mat3 = mat1 * mat2
+mat_mul = mat1 * mat2
 print('---div---')
 m1 = Matrix(2, 2)
 m1.matrix = [[4, 7], [2, 6]]
-m1 * m1.inverse()
+mat_same = m1 * m1.inverse()
 
