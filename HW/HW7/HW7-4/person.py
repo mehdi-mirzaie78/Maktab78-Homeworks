@@ -1,22 +1,23 @@
 import logging
 
 # logging.basicConfig(level=logging.WARNING)
-logging.basicConfig()
-logger = logging.getLogger()
 
-stream_handler = logging.StreamHandler()
+logger_person = logging.getLogger('person')
+logger_person.setLevel(20)
+# stream_handler = logging.StreamHandler()
 file_handler = logging.FileHandler('person.log', 'a', encoding='utf-8')
 
-log_format = logging.Formatter("%(asctime)s-%(name)s  \t\t-%(levelname)s\t\t\t\t-%(message)s")
-log_format_console = logging.Formatter("%(asctime)s \t -%(levelname)s \t -%(message)s")
+log_format1 = logging.Formatter("%(asctime)s-%(name)s  \t\t-%(levelname)s\t\t\t\t-%(message)s")
+# log_format_console1 = logging.Formatter("%(asctime)s \t -%(levelname)s \t -%(message)s")
 
-stream_handler.setLevel(logging.DEBUG)
+# stream_handler.setLevel(logging.DEBUG)
 file_handler.setLevel(logging.DEBUG)
-stream_handler.setFormatter(log_format_console)
-file_handler.setFormatter(log_format)
 
-logger.addHandler(stream_handler)
-logger.addHandler(file_handler)
+# stream_handler.setFormatter(log_format_console1)
+file_handler.setFormatter(log_format1)
+
+# logger_person.addHandler(stream_handler)
+logger_person.addHandler(file_handler)
 
 
 class Person:
@@ -24,7 +25,7 @@ class Person:
         self.name = name
         self.family = family
         self.age = age
-        logging.warning("Person created! {} {}".format(self.name, self.family))
+        logger_person.warning("Person created! {} {}".format(self.name, self.family))
 
     @property
     def age(self):
@@ -35,5 +36,5 @@ class Person:
         if a > 0:
             self._age = a
         else:
-            logging.critical("Invalid age!")
+            logger_person.critical("Invalid age!")
         self._age = 0
