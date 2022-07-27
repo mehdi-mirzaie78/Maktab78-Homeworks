@@ -1,9 +1,11 @@
 # 2022-07-27 16:05:31.567031
 class DiscountError(Exception):
-    pass
+
+    def __init__(self, message='DiscountError! discount must be between 0 to 1'):
+        super().__init__(message)
 
 
-def apply_discount(price: int, discount: float) -> int:
+def apply_discount(price: int, discount: float) -> int | DiscountError:
     """
          This Function Calculates the Final Price
     --------------------------------------------------
@@ -23,7 +25,10 @@ def apply_discount(price: int, discount: float) -> int:
         assert 0 <= final <= price
         return final
     except AssertionError:
-        print(DiscountError)
+        try:
+            raise DiscountError
+        except DiscountError as error:
+            return error
 
 
 print(apply_discount(10000, .2))    # 8000
