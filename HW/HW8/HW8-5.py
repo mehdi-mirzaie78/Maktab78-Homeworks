@@ -5,22 +5,26 @@ with open("numbers.pickle", 'rb') as f:
 print(unpickled)
 
 
-# def calculate_divides(file_path: str) -> list[float | None]:
-#     """Unpickled File & Returned Result Divide Numbers"""
-#     file = open(file_path, 'rb')
-#     numbers = pickle.load(file)
-#     try:
-#         result = list(map(lambda t: t[0] / t[1], numbers))
-#     except TypeError:
-#         result = [None for _ in numbers]
-#     file.close()
-#     return result
+# 1st solution
+def calculate_divides1(file_path: str) -> list[float | None]:
+    """Unpickled File & Returned Result Divide Numbers"""
+    file = open(file_path, 'rb')
+    numbers = pickle.load(file)
+    result = numbers
+    try:
+        result = list(map(lambda t: t[0] / t[1], numbers))
+    except (TypeError, ZeroDivisionError):
+        result = [None for _ in numbers]
+    finally:
+        file.close()
+        return result
 
 
-# print(calculate_divides("numbers.pickle"))
+print(calculate_divides1("numbers.pickle"))
 
 
-def calculate_divides(file_path: str) -> list[float | None]:
+# 2nd solution
+def calculate_divides2(file_path: str) -> list[float | None]:
     """Unpickled File & Returned Result Divide Numbers"""
     file = open(file_path, 'rb')
     numbers = pickle.load(file)
@@ -29,18 +33,15 @@ def calculate_divides(file_path: str) -> list[float | None]:
     for t in numbers:
         try:
             result.append(t[0] / t[1])
-        except TypeError:
-            # result.append('TypeError')
-            result.append(None)
-        except ZeroDivisionError:
-            # result.append('ZeroDivisionError')
+        except (TypeError, ZeroDivisionError):
             result.append(None)
     return result
 
 
-print(calculate_divides("numbers.pickle"))
+print(calculate_divides2("numbers.pickle"))
 
 """
+# 2nd solution
 1. We don't need the file to be opened in the entire process.
    so I closed it right after that I read the numbers.
 
