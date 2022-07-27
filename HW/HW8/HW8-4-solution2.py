@@ -13,9 +13,17 @@ def apply_discount(price: int, discount: float) -> int:
     :raises `DiscountError`
     --------------------------------------------------
     """
+
+    # final = int(price * (1 - discount))
+    # assert 0 <= final <= price, DiscountError
+    # return final
+
     final = int(price * (1 - discount))
-    assert 0 <= final <= price, DiscountError
-    return final
+    try:
+        assert 0 <= final <= price
+        return final
+    except AssertionError:
+        print(DiscountError)
 
 
 print(apply_discount(10000, .2))    # 8000
