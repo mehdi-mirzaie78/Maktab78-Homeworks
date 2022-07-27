@@ -41,7 +41,7 @@ def calculate_divides(file_path: str) -> list[float | None]:
 print(calculate_divides("numbers.pickle"))
 
 """
-1. We don't need the file to be opened in entire process.
+1. We don't need the file to be opened in the entire process.
    so I closed it right after that I read the numbers.
 
 2. We want to have the None for each exceptions in the list
@@ -49,4 +49,5 @@ print(calculate_divides("numbers.pickle"))
    so I add a for above the try & except block.
    and for each member of numbers that has an error I assign
    None for that member in result
+   if I found that right ☺ I don't know
 """
