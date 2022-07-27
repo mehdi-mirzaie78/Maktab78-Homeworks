@@ -1,6 +1,5 @@
 #!/bin/bash
 name=$(find . -type f -name '*.mp3' | shuf -n 1)
-#vlc --random $p
 if [ -f $name ]; then
   nvlc $name
   trimmed=$(basename $name .mp3)
@@ -19,9 +18,11 @@ echo "Average Score for all musics is: "
 
 
 #========================
+
 #cvlc --playlist-autostart
 #p=$(ls | grep \.mp3$)
 #p=$(ls *.mp3)
+#vlc --random $p
 #name=$(find ./ -type f | shuf -n 1)
 #mpg123 -Z *.mp3
 #vlc --random
