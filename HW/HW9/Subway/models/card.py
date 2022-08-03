@@ -1,18 +1,27 @@
 from Subway.exceptions import *
 from datetime import datetime
+from logger import logger
+
+logger.name = 'CARD'
 
 
-# Class of card for creating card for trip
+# Card class for creating card to travel
 class Card:
     CARDS = ('single_trip', 'credit', 'term')
 
-    def __init__(self, name: str, charge: int | float | str = '', expiration_date: datetime | str = '') -> None:
+    def __init__(self, name: str, charge: int | float | str = '') -> None:
         self.name = name
         self.charge = charge
-        self.expiration_date = expiration_date
+        if self.name == 'term':
+            self.expiration_date = self.create_expiration_date()
+        logger.info(f"{self.name} card has created")
 
     def __repr__(self):
-        return f"card {self.name} - charge: {self.charge}"
+        return f"<<{self.name} card - charge: {self.charge}>>"
+
+    def __getattr__(self, item):
+        logger.error(f"AttributeError:{item} attribute doesn't exist")
+        return f"'{item}' attribute does not exist!"
 
     @property
     def name(self):
@@ -21,8 +30,10 @@ class Card:
     @name.setter
     def name(self, value):
         if not isinstance(value, str):
+            logger.error("TypeError: name of the card must be a string")
             raise TypeError("Name must be str")
         if value not in self.__class__.CARDS:
+            logger.error("CardError: Invalid card. card only can be one of ('single_trip', 'credit', 'term')")
             raise CardError("Invalid card.")
         self._name = value
 
@@ -34,43 +45,68 @@ class Card:
     def charge(self, value):
         if self.name != 'single_trip':
             if isinstance(value, int):
-                if value <= 0:
+                if value < 0:
+                    logger.error("ChargeError: charge can't be negative")
                     raise ChargeError("charge can't be negative")
                 self._charge = value
+                logger.info(f"{self.name} card's charge is {value}")
             else:
-                raise TypeError("charge must be an int number")
+                logger.error("ChargeError: charge must an int number")
+                raise ChargeError("charge must be an int number")
         else:
             self._charge = 10  # price for only one trip
+            logger.info("single_trip card's charge is 10")
 
-    @property
-    def expiration_date(self):
-        return self._expiration_date
+    @staticmethod
+    def create_expiration_date():
+        today = datetime.today().date()
+        return datetime(today.year + 1, today.month, today.day).date()
 
-    @expiration_date.setter
-    def expiration_date(self, value):
-        if self.name == 'term':
-            if not isinstance(value, datetime):
-                raise TypeError("expiration date must be an instance of datetime")
-            if value < datetime.today():
-                raise DateError("your card has expired")
-            self._expiration_date = value
-        else:
-            self._expiration_date = None
-
-    # def charge_card(self, price):
-    #     if self.name != 'single_trip':
-    #         self.charge += price
-    #     else:
-    #         raise CardError("you can't charge single trip card")
+    def charge_increase(self, value):
+        if not (isinstance(value, int) or isinstance(value, float)):
+            logger.error("ChargeError: you should enter a float or an int number")
+            raise ChargeError("you should enter a float or an int number")
+        if value <= 10:
+            logger.error("ChargeError: minimum price for charging your card is 10")
+            raise ChargeError("minimum price for charging your card is 10")
+        self.charge += value
+        logger.info(f"{self.name} card has charged {value}")
 
     def pay(self, cost=10):
         if self.name == 'single_trip':
             if self.charge >= cost:
                 self._charge -= cost
+                logger.info(f"you paid {cost} for the trip, by {self.name} card")
             else:
-                raise ChargeError("you used your card before sorry")
+                logger.error("ChargeError: this card has been used before")
+                raise ChargeError("This card has been used before")
         else:
             if self.charge >= cost:
                 self.charge -= cost
+                logger.info(f"you paid {cost} for the trip, by {self.name} card")
             else:
-                raise ChargeError("you don't have enough charge to pay the trip sorry")
+                logger.error("ChargeError: you don't have enough charge to pay cost of the trip, sorry")
+                raise ChargeError("you don't have enough charge to pay cost of the trip, sorry")
+
+# card1 = Card('single_trip')
+# print(card1.name)
+# print(card1.charge)
+# print(card1.expiration_date)
+
+# card1.pay()
+
+# card2 = Card('credit', 1000)
+# print(card2.name)
+# print(card2.charge)
+# card2.charge_increase(20)
+# card2.pay(1020)
+# print(card2.charge)
+# print(card2.expiration_date)
+
+# card3 = Card('term', 100)
+# print(card3.name)
+# print(card3.charge)
+# print(card3.expiration_date)
+# card3.charge_increase(20)
+# print(card3.charge)
+# card3.pay(30)
