@@ -10,3 +10,29 @@ class DateError(Exception):
     pass
 
 
+class TripError(Exception):
+    pass
+
+
+class FullNameError(Exception):
+    pass
+
+
+class AgeError(Exception):
+    pass
+
+
+class NationalCodeError(Exception):
+    pass
+
+
+class BalanceError(Exception):
+    pass
+
+
+class DepositError(Exception):
+    pass
+
+
+class WithDrawError(Exception):
+    pass
