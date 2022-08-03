@@ -36,3 +36,7 @@ class DepositError(Exception):
 
 class WithDrawError(Exception):
     pass
+
+
+class CostError(Exception):
+    pass
