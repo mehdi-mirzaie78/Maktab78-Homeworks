@@ -21,6 +21,9 @@ class BankAccount:
         self.__class__.__clients[self.account_number] = self
         logger.info(f"Bank account with {self.account_number} for {self.full_name} with {self.balance} has created.")
 
+    def __repr__(self):
+        return f"Bank account with {self.account_number} for {self.full_name} with {self.balance}"
+
     @property
     def full_name(self):
         return self._full_name
