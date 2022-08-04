@@ -7,7 +7,7 @@ logger.name = 'USER'
 
 
 class User:
-    list_of_users = []
+    list_of_users = {}
 
     def __init__(self, fullname, age, account: BankAccount):
         self.fullname = fullname
@@ -16,7 +16,7 @@ class User:
         print(f'your user id is: {self.__id_code}')
         self.account = account
         self.wallet = {}
-        self.__class__.list_of_users.append(self)
+        self.__class__.list_of_users[self.__id_code] = self
         logger.info(f"User {fullname} with {self.__id_code} and bank account: {account}")
         self.dumper()
 
@@ -27,6 +27,16 @@ class User:
         with open(filename, 'ab') as file:
             pickle.dump(self, file)
         logger.info(f"user has pickled into {'users.pickle'}")
+
+    @classmethod
+    def login_user(cls, code):
+        if not isinstance(code, int):
+            logger.error("LoginError: ID code is an int number")
+            raise LoginError("ID code is an int number")
+        if code not in cls.list_of_users:
+            logger.error("LoginError: Wrong ID")
+            raise LoginError("Wrong ID")
+        return cls.list_of_users[code]
 
     def buy_card(self, card, charge=10):
         if card not in Card.CARDS:

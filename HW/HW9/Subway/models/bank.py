@@ -1,6 +1,6 @@
 from Subway.exceptions import FullNameError, AgeError, \
     NationalCodeError, BalanceError, DepositError, \
-    WithDrawError
+    WithDrawError, LoginError
 from uuid import uuid4
 from Subway.models.logger import logger
 logger.name = 'BANK'
@@ -18,10 +18,10 @@ class BankAccount:
         self.min_balance = 100
         self.balance = balance
         self.__class__.__clients[self.account_number] = self
-        logger.info(f"Bank account with {self.account_number} for {self.full_name} with {self.balance} has created.")
+        logger.info(f"Bank account with {self.account_number} account number for {self.full_name} with {self.balance} balance has created.")
 
     def __repr__(self):
-        return f"Bank account with {self.account_number} for {self.full_name} with {self.balance}"
+        return f"Bank account with {self.account_number} account number for {self.full_name} with {self.balance} balance has created."
 
     @property
     def full_name(self):
@@ -81,6 +81,16 @@ class BankAccount:
             logger.error("BalanceError: minimum balance is 100")
             raise BalanceError("minimum balance is 100")
         self._balance = value
+
+    @classmethod
+    def login_bank(cls, code):
+        if not isinstance(code, int):
+            logger.error("LoginError: Account number is an int number")
+            raise LoginError("Account number is an int number")
+        if code not in cls.__clients:
+            logger.error("LoginError: Wrong Account Number")
+            raise LoginError("Wrong Account Number")
+        return cls.__clients[code]
 
     def deposit(self, money):
         if not isinstance(money, int) or not (isinstance(money, float)):

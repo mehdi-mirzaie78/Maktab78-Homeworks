@@ -73,6 +73,8 @@ class Card:
         logger.info(f"{self.name} card has charged {value}")
 
     def pay(self, cost=10):
+        if self.name == 'term':
+            self.check_date(self.expiration_date)
         if self.name == 'single_trip':
             if self.charge >= cost:
                 self._charge -= cost
@@ -87,6 +89,14 @@ class Card:
             else:
                 logger.error("ChargeError: you don't have enough charge to pay cost of the trip, sorry")
                 raise ChargeError("you don't have enough charge to pay cost of the trip, sorry")
+
+    @staticmethod
+    def check_date(date):
+        y, m, d = datetime.today().year, datetime.today().month, datetime.today().day
+        if date < datetime(y, m, d):
+            logger.error("DateError: your card has expired")
+            raise DateError("Your card has expired")
+        return True
 
 # card1 = Card('single_trip')
 # print(card1.name)

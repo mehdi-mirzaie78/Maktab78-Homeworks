@@ -30,6 +30,10 @@ class BalanceError(Exception):
     pass
 
 
+class LoginError(Exception):
+    pass
+
+
 class DepositError(Exception):
     pass
 
@@ -40,3 +44,4 @@ class WithDrawError(Exception):
 
 class CostError(Exception):
     pass
+

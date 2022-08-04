@@ -4,7 +4,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 console_handler = logging.StreamHandler()
-file_handler = logging.FileHandler('Metro.log')
+file_handler = logging.FileHandler('metro.log')
 
 c_format = logging.Formatter("%(asctime)s -\t %(name)s - %(levelname)s\t - %(message)s")
 
