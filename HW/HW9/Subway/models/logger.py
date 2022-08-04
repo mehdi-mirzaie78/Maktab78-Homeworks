@@ -16,6 +16,3 @@ file_handler.setLevel(logging.DEBUG)
 
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
-
-
-# logger.debug("this is a debug message")

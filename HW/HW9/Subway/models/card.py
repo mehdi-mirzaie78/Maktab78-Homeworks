@@ -1,6 +1,6 @@
 from Subway.exceptions import *
 from datetime import datetime
-from logger import logger
+from Subway.models.logger import logger
 
 logger.name = 'CARD'
 
