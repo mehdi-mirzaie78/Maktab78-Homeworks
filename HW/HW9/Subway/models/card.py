@@ -17,7 +17,7 @@ class Card:
         logger.info(f"{self.name} card has created")
 
     def __repr__(self):
-        return f"<<{self.name} card - charge: {self.charge}>>"
+        return f"{self.name} card - charge: {self.charge}"
 
     def __getattr__(self, item):
         logger.error(f"AttributeError:{item} attribute doesn't exist")
