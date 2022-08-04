@@ -2,8 +2,7 @@ from Subway.exceptions import FullNameError, AgeError, \
     NationalCodeError, BalanceError, DepositError, \
     WithDrawError
 from uuid import uuid4
-from logger import logger
-
+from Subway.models.logger import logger
 logger.name = 'BANK'
 
 
@@ -65,8 +64,8 @@ class BankAccount:
             logger.error("NationalCodeError: you should enter your national code as a number")
             raise NationalCodeError("you should enter your national code as a number")
         if len(str(value)) != 10:
-            logger.error("NationalCodeError: your national code must be 10 digit")
-            raise NationalCodeError("your national code must be 10 digit")
+            logger.error("NationalCodeError: your national code must be 10 digits")
+            raise NationalCodeError("your national code must be 10 digits")
         self._national_code = value
 
     @property
