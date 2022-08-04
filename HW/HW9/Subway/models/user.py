@@ -1,8 +1,8 @@
 from uuid import uuid4
-from bank import BankAccount
-from card import *
+from Subway.models.bank import BankAccount
+from Subway.models.card import *
 import pickle
-from logger import logger
+from Subway.models.logger import logger
 logger.name = 'USER'
 
 

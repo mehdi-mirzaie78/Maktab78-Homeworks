@@ -1,7 +1,7 @@
 from time import sleep
-from user import *
+from Subway.models.user import *
 from Subway.exceptions import CostError
-from logger import logger
+from Subway.models.logger import logger
 logger.name = 'TRIP'
 
 
