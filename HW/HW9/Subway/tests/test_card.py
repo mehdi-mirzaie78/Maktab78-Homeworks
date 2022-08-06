@@ -15,7 +15,6 @@ class TestCard(unittest.TestCase):
         self.assertEqual(self.single1.__repr__(), f"{self.single1.name} card - charge: {self.single1.charge}")
         self.assertEqual(self.single1.expiration_date, f"'expiration_date' attribute does not exist!")
 
-
         self.assertEqual(self.credit1.name, 'credit')
         self.assertEqual(self.credit1.charge, 1000)
 
