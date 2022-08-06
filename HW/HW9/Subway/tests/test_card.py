@@ -13,6 +13,8 @@ class TestCard(unittest.TestCase):
         self.assertEqual(self.single1.name, 'single_trip')
         self.assertEqual(self.single1.charge, 10)
         self.assertEqual(self.single1.__repr__(), f"{self.single1.name} card - charge: {self.single1.charge}")
+        self.assertEqual(self.single1.expiration_date, f"'expiration_date' attribute does not exist!")
+
 
         self.assertEqual(self.credit1.name, 'credit')
         self.assertEqual(self.credit1.charge, 1000)
@@ -49,6 +51,12 @@ class TestCard(unittest.TestCase):
         self.assertRaises(TypeError, Card, 'term', 320, 2022)
         self.assertRaises(TypeError, Card, 'term', 320, True)
 
+    def test_charge_increase(self):
+        self.credit1.charge_increase(1000)
+        self.assertTrue(self.credit1.charge == 2000)
+        self.assertRaises(ChargeError, self.credit1.charge_increase, '3')
+        self.assertRaises(ChargeError, self.credit1.charge_increase, 3)
+
     def test_pay(self):
         self.single1.pay()
         self.assertTrue(self.single1.charge == 0)
@@ -61,6 +69,10 @@ class TestCard(unittest.TestCase):
         self.credit1.pay()
         self.assertEqual(self.credit1.charge, 990)
         self.assertRaises(ChargeError, self.credit1.pay, 1000)
+
+    def test_check_date(self):
+        self.assertEqual(self.term1.check_date(datetime(2023, 8, 21)), True)
+        self.assertRaises(DateError, self.term1.check_date, datetime(2022, 8, 6))
 
 
 if __name__ == '__main__':
