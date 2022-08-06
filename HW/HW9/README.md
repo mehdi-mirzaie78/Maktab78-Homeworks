@@ -12,5 +12,5 @@ ___
   + We have a user who has a bank account with his/her information, and it's possible to do finance transactions.
   + Our user can purchase cards for trip
 
-+ ### _Trip_
++ ### Trip
   + In Trip class we have origin, destination, user, and a card which our user will pay the cost with it.
