@@ -25,7 +25,8 @@ class User:
 
     def dumper(self, filename='users.pickle'):
         with open(filename, 'ab') as file:
-            pickle.dump(self, file)
+            temp = {self.__id_code: self}
+            pickle.dump(temp, file)
         logger.info(f"user has pickled into {'users.pickle'}")
 
     # this part is for unpickling data that we pickled in users.pickle

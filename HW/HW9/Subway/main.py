@@ -10,6 +10,7 @@ from Subway.models.logger import logger
 """Welcome to the best part of the programming which means creating interface"""
 while True:
     print("""
+        [0]: Restore Information
         [1]: Register User With A Bank Account
         [2]: Account Management
         [3]: User Management
@@ -19,11 +20,15 @@ while True:
     """)
     control_key = int(input("Enter: "))
 
-    # if control_key == 0:
-    #     # Restoring users that have been registered before
-    #     User.list_of_users = list(User.load_all())
-    #     print("the file users.pickle has been restored successfully ")
-    if control_key == 1:
+    if control_key == 0:
+        # Restoring users that have been registered before
+        for i in list(User.load_all()):
+            User.list_of_users.update(i)
+        for j in list(BankAccount.load_all()):
+            BankAccount.clients.update(j)
+        else:
+            print("the file users.pickle has been restored successfully ")
+    elif control_key == 1:
         logger.name = 'USER'
         system('cls')
         while True:

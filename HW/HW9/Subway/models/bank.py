@@ -1,3 +1,4 @@
+import pickle
 from Subway.exceptions import FullNameError, AgeError, \
     NationalCodeError, BalanceError, DepositError, \
     WithDrawError, LoginError
@@ -7,7 +8,7 @@ logger.name = 'BANK'
 
 
 class BankAccount:
-    __clients = {}
+    clients = {}
 
     def __init__(self, full_name, age, national_code, balance):
         self.account_number = uuid4().node % 1000000
@@ -17,11 +18,28 @@ class BankAccount:
         self.national_code = national_code
         self.min_balance = 100
         self.balance = balance
-        self.__class__.__clients[self.account_number] = self
-        logger.info(f"Bank account with {self.account_number} account number for {self.full_name} with {self.balance} balance has created.")
+        self.__class__.clients[self.account_number] = self
+        self.dumper()
+        logger.info(f"Bank account with {self.account_number} account number for {self.full_name} with {self.balance}\
+         balance has created.")
 
     def __repr__(self):
-        return f"Bank account with {self.account_number} account number for {self.full_name} with {self.balance} balance has created."
+        return f"Bank account with {self.account_number} account number for {self.full_name} with {self.balance}\
+         balance has created."
+
+    def dumper(self):
+        with open('accounts.pickle', 'ab') as f:
+            temp = {self.account_number: self}
+            pickle.dump(temp, f)
+
+    @staticmethod
+    def load_all(filename='accounts.pickle'):
+        with open(filename, 'rb') as f:
+            while True:
+                try:
+                    yield pickle.load(f)
+                except EOFError:
+                    break
 
     @property
     def full_name(self):
@@ -87,10 +105,10 @@ class BankAccount:
         if not isinstance(code, int):
             logger.error("LoginError: Account number is an int number")
             raise LoginError("Account number is an int number")
-        if code not in cls.__clients:
+        if code not in cls.clients:
             logger.error("LoginError: Wrong Account Number")
             raise LoginError("Wrong Account Number")
-        return cls.__clients[code]
+        return cls.clients[code]
 
     def show_balance(self):
         self.balance -= 10

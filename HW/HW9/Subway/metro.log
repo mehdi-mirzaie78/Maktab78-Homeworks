@@ -5,3 +5,37 @@
 2022-08-06 18:02:43,508 -	 Bank Account - ERROR	 - LoginError: Wrong Account Number
 2022-08-06 18:05:03,743 -	 User - ERROR	 - LoginError: Wrong ID
 2022-08-06 18:05:13,112 -	 User - ERROR	 - LoginError: Wrong ID
+2022-08-06 22:29:41,854 -	 USER - INFO	 - Bank account with 249715 account number for mehdi with 10000 balance has created.
+2022-08-06 22:29:41,854 -	 USER - INFO	 - User mehdi with 52 and bank account: Bank account with 249715 account number for mehdi with 10000 balance has created.
+2022-08-06 22:29:41,861 -	 USER - INFO	 - user has pickled into users.pickle
+2022-08-06 22:30:44,692 -	 Bank Account - INFO	 - 100.0 Withdraw from 249715 account your current balance: 9880.0
+2022-08-06 22:30:54,261 -	 Bank Account - INFO	 - 120.0 deposited to 249715 account with balance: 10000.0
+2022-08-06 22:31:17,081 -	 User - INFO	 - 10 Withdraw from 249715 account your current balance: 9990.0
+2022-08-06 22:31:17,081 -	 User - INFO	 - single_trip card's charge is 10
+2022-08-06 22:31:17,081 -	 User - INFO	 - single_trip card has created
+2022-08-06 22:31:17,081 -	 User - INFO	 - single_trip card added to mehdi' wallet
+2022-08-06 22:31:27,671 -	 User - INFO	 - 100 Withdraw from 249715 account your current balance: 9890.0
+2022-08-06 22:31:27,671 -	 User - INFO	 - credit card's charge is 100
+2022-08-06 22:31:27,671 -	 User - INFO	 - credit card has created
+2022-08-06 22:31:27,671 -	 User - INFO	 - credit card added to mehdi' wallet
+2022-08-06 22:31:32,692 -	 User - INFO	 - 100 Withdraw from 249715 account your current balance: 9790.0
+2022-08-06 22:31:32,692 -	 User - INFO	 - term card's charge is 100
+2022-08-06 22:31:32,692 -	 User - INFO	 - term card has created
+2022-08-06 22:31:32,692 -	 User - INFO	 - term card added to mehdi' wallet
+2022-08-06 22:32:17,821 -	 Trip - INFO	 - The Trip registered
+2022-08-06 22:32:17,821 -	 Trip - INFO	 - you paid 10 for the trip, by single_trip card
+2022-08-06 22:32:17,821 -	 Trip - INFO	 - user: mehdi with id: 52 payed the cost of the origin: kermanshah|destination: tehran trip with single_trip card
+2022-08-06 22:32:22,831 -	 Trip - INFO	 - origin: kermanshah|destination: tehran trip has done
+2022-08-06 22:32:46,742 -	 Trip - INFO	 - The Trip registered
+2022-08-06 22:32:46,742 -	 Trip - INFO	 - credit card's charge is 90
+2022-08-06 22:32:46,742 -	 Trip - INFO	 - you paid 10 for the trip, by credit card
+2022-08-06 22:32:46,742 -	 Trip - INFO	 - user: mehdi with id: 52 payed the cost of the origin: tehran|destination: kermanshah trip with credit card
+2022-08-06 22:32:51,752 -	 Trip - INFO	 - origin: tehran|destination: kermanshah trip has done
+2022-08-06 23:17:27,444 -	 USER - INFO	 - Bank account with 550177 account number for mehdi mirzaie with 100000 balance has created.
+2022-08-06 23:17:27,459 -	 USER - INFO	 - User mehdi mirzaie with 640 and bank account: Bank account with 550177 account number for mehdi mirzaie with 100000 balance has created.
+2022-08-06 23:17:27,460 -	 USER - INFO	 - user has pickled into users.pickle
+2022-08-06 23:18:42,949 -	 Bank Account - ERROR	 - LoginError: Wrong Account Number
+2022-08-06 23:36:56,167 -	 USER - INFO	 - Bank account with 9072 account number for mehdi mirzaie with 10000         balance has created.
+2022-08-06 23:36:56,168 -	 USER - INFO	 - User mehdi mirzaie with 40 and bank account: Bank account with 9072 account number for mehdi mirzaie with 10000         balance has created.
+2022-08-06 23:36:56,169 -	 USER - INFO	 - user has pickled into users.pickle
+2022-08-06 23:38:41,895 -	 Bank Account - INFO	 - 10000.0 deposited to 9072 account with balance: 19990.0
