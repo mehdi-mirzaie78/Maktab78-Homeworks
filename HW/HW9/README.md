@@ -1,4 +1,4 @@
-ERD Explanation
+# ERD Explanation
 ___
 + __Card__
   + We have a class of Card which includes :(single trip, credit, term). 
