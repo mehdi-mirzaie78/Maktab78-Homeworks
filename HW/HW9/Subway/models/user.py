@@ -21,12 +21,22 @@ class User:
         self.dumper()
 
     def __repr__(self):
-        return f"user: {self.fullname}"
+        return f"user: {self.fullname} with id: {self.__id_code}"
 
     def dumper(self, filename='users.pickle'):
         with open(filename, 'ab') as file:
             pickle.dump(self, file)
         logger.info(f"user has pickled into {'users.pickle'}")
+
+    # this part is for unpickling data that we pickled in users.pickle
+    @staticmethod
+    def load_all(filename='users.pickle'):
+        with open(filename, "rb") as f:
+            while True:
+                try:
+                    yield pickle.load(f)
+                except EOFError:
+                    break
 
     @classmethod
     def login_user(cls, code):

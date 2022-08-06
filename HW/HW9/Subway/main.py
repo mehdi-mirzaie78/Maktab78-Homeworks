@@ -12,23 +12,28 @@ while True:
     print("""
         [1]: Register User With A Bank Account
         [2]: Account Management
-        [3]: Register On Trip
-        [4]: Manager
-        [5]: Exit
+        [3]: User Management
+        [4]: Register On Trip
+        [5]: Manager
+        [6]: Exit
     """)
     control_key = int(input("Enter: "))
 
+    # if control_key == 0:
+    #     # Restoring users that have been registered before
+    #     User.list_of_users = list(User.load_all())
+    #     print("the file users.pickle has been restored successfully ")
     if control_key == 1:
         logger.name = 'USER'
         system('cls')
         while True:
             print("Register User With A Bank Account".center(60, '-'))
             print()
-            name = input('Full name: ')
-            age = int(input('Age: '))
-            na_code = int(input('National code: '))
-            balance = int(input('Balance: '))
             try:
+                name = input('Full name: ')
+                age = int(input('Age: '))
+                na_code = int(input('National code: '))
+                balance = int(input('Balance: '))
                 account = BankAccount(name, age, na_code, balance)
                 user = User(name, age, account)
             except FullNameError:
@@ -39,18 +44,113 @@ while True:
                 pass
             except BalanceError:
                 pass
+            except ValueError as ve:
+                logger.error(ve)
             else:
+                print('----------------------------\n')
                 print(account)
                 print(user)
-                print("""
-        [P]: Purchase Card
-        [B]: Go Back To Menu
-        [R]: Register User
-        [E]: Exit
-                """)
-                c = input('Enter: ').upper()
-                if c == 'P':
-                    system('cls')
+                while True:
+                    print("""
+            [B]: Back
+            [E]: Exit
+                    """)
+                    c = input('Enter: ').upper()
+                    if c == 'B':
+                        system('cls')
+                        break
+                    elif c == 'E':
+                        print("Bye")
+                        exit()
+                    else:
+                        print('Invalid Key')
+                        pass
+                break
+
+    elif control_key == 2:
+        logger.name = 'Bank Account'
+        system('cls')
+        while True:
+            print("""
+        [L]: Login
+        [B]: Back
+            """)
+            cc = input('Enter: ').upper()
+            if cc == 'L':
+                system('cls')
+                print('\n', "Account Management - Login".center(60, '-'), sep='')
+                try:
+                    account_number = int(input('Enter your account number dear user: '.title()))
+                    user = BankAccount.login_bank(account_number)
+                except TypeError as te:
+                    logger.error(te)
+                except LoginError as le:
+                    pass
+                except ValueError as ve:
+                    logger.error(ve)
+                else:
+                    print("you logged in successfully")
+                    while True:
+                        print("""
+                [C]: Balance
+                [W]: Withdraw
+                [D]: Deposit
+                [B]: Back
+                [E]: Exit
+                        """)
+                        c = input("Enter: ").upper()
+                        if c == 'C':
+                            print(f"You balance is: {user.show_balance()}")
+                        elif c == 'W':
+                            money = float(input("Enter amount of money that you want to withdraw: "))
+                            try:
+                                user.withdraw(money)
+                            except ValueError as ve:
+                                logger.error(ve)
+                            except WithDrawError:
+                                pass
+                            else:
+                                print(f"\nTransaction Successful. your balance is: {user.balance}")
+                        elif c == 'D':
+                            money = float(input("Enter amount of money that you want to Deposit: "))
+                            try:
+                                user.deposit(money)
+                            except ValueError as ve:
+                                logger.error(ve)
+                            except DepositError:
+                                pass
+                            else:
+                                print(f"\nTransaction Successful. your balance is: {user.balance}")
+                        elif c == 'B':
+                            system('cls')
+                            break
+                        elif c == 'E':
+                            exit()
+                        else:
+                            print('Wrong Input')
+                            pass
+                    break
+            elif cc == 'B':
+                system('cls')
+                break
+
+    elif control_key == 3:
+        logger.name = 'User'
+        system('cls')
+        while True:
+            print('\n', "User Management - Login".center(60, '-'), sep='')
+            try:
+                id_code = int(input('Enter your id code dear user: '.title()))
+                user = User.login_user(id_code)
+            except TypeError as te:
+                logger.error(te)
+            except LoginError as le:
+                pass
+            except ValueError as ve:
+                logger.error(ve)
+            else:
+                print("You logged in successfully")
+                while True:
                     print("-- Purchase --")
                     print("""      
         [S]: Single Trip Card
@@ -58,89 +158,30 @@ while True:
         [T]: Term Card
         [B]: Back
                 """)
-                    logger.name = 'Purchase'
-                    while True:
-                        cin = input('Enter: ').upper()
-                        if cin == 'S':
-                            # 'single_trip', 'credit', 'term'
-                            user.buy_card('single_trip')
-                            print('you bought a single trip card')
-                        elif cin == 'C':
-                            charge = int(input('Charge: '))
-                            user.buy_card('credit', charge)
-                            print('you bought a credit card')
-                        elif cin == 'T':
-                            charge = int(input('Charge: '))
-                            user.buy_card('term', charge)
-                            print('you bought a term card')
-                        elif cin == 'B':
-                            system('cls')
-                            break
-                        else:
-                            print("Invalid Key")
-                    break
-                elif c == 'B':
-                    system('cls')
-                    break
-                elif c == 'R':
-                    system('cls')
-                    pass
-                elif c == 'E':
-                    exit()
-                else:
-                    print('Invalid Key')
-                    pass
+                    cin = input('Enter: ').upper()
+                    if cin == 'S':
+                        system('cls')
+                        # 'single_trip', 'credit', 'term'
+                        user.buy_card('single_trip')
+                        print('you bought a single trip card')
+                    elif cin == 'C':
+                        system('cls')
+                        charge = int(input('Charge: '))
+                        user.buy_card('credit', charge)
+                        print('you bought a credit card')
+                    elif cin == 'T':
+                        system('cls')
+                        charge = int(input('Charge: '))
+                        user.buy_card('term', charge)
+                        print('you bought a term card')
+                    elif cin == 'B':
+                        system('cls')
+                        break
+                    else:
+                        print("Invalid Key")
+                break
 
-    elif control_key == 2:
-        logger.name = 'Bank Account'
-        system('cls')
-        while True:
-            print("Account Management - Login".center(60, '-'))
-            try:
-                account_number = int(input('Enter your account number dear user: '.title()))
-                user = BankAccount.login_bank(account_number)
-            except TypeError as te:
-                logger.error(te)
-            except LoginError as le:
-                pass
-            else:
-                print("you logged in successfully")
-                print("""
-        [W]: Withdraw
-        [D]: Deposit
-        [B]: Back To Menu
-        [E]: Exit
-                """)
-                c = input("Enter: ").upper()
-                if c == 'W':
-                    money = float(input("Enter amount of money that you want to withdraw"))
-                    try:
-                        user.withdraw(money)
-                    except ValueError as ve:
-                        logger.error(ve)
-                    except WithDrawError:
-                        pass
-                    else:
-                        print(f"Transaction Successful. your balance is: {user.balance}")
-                elif c == 'D':
-                    money = float(input("Enter amount of money that you want to Deposit: "))
-                    try:
-                        user.deposit(money)
-                    except ValueError as ve:
-                        logger.error(ve)
-                    except DepositError:
-                        pass
-                    else:
-                        print(f"Transaction Successful. your balance is: {user.balance}")
-                elif c == 'B':
-                    system('cls')
-                    break
-                elif c == 'E':
-                    exit()
-                else:
-                    print('Wrong Input')
-                    pass
-    elif control_key == 3:
+    elif control_key == 4:
         logger.name = 'Trip'
         system('cls')
         print("Register On Trip".center(60, '-'))
@@ -154,7 +195,7 @@ while True:
         [S]: Single Trip Card
         [C]: Credit Card
         [T]: Term Card
-        -- Extra keys --
+        -- Extra keys 
         [B]: Back
         [E]: Exit
             """)
@@ -186,7 +227,7 @@ while True:
                 exit()
             else:
                 print("Invalid Key")
-    elif control_key == 4:
+    elif control_key == 5:
         print('This part of the site is temporary down')
     else:
         print("Thanks for choosing us ☺")

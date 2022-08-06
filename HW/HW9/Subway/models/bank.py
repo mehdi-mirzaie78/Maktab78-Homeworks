@@ -92,8 +92,12 @@ class BankAccount:
             raise LoginError("Wrong Account Number")
         return cls.__clients[code]
 
+    def show_balance(self):
+        self.balance -= 10
+        return self.balance
+
     def deposit(self, money):
-        if not isinstance(money, int) or not (isinstance(money, float)):
+        if not (isinstance(money, int) or isinstance(money, float)):
             logger.error("DepositError: money must be int or float number")
             raise DepositError("money must be int or float number")
         if money < self.min_balance:
