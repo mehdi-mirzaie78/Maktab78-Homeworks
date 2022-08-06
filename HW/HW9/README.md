@@ -1,6 +1,6 @@
 ## ERD Explanation
 ___
-+ ### __Card__
++ ### Card
   + We have a class of Card which includes :(single trip, credit, term). 
   + Each card has a name and amount of charge, but only term card has expiration date.
   + We have a method for charging cards and a method to pay the cost of the trip.
