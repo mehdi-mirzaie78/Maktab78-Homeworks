@@ -39,3 +39,24 @@
 2022-08-06 23:36:56,168 -	 USER - INFO	 - User mehdi mirzaie with 40 and bank account: Bank account with 9072 account number for mehdi mirzaie with 10000         balance has created.
 2022-08-06 23:36:56,169 -	 USER - INFO	 - user has pickled into users.pickle
 2022-08-06 23:38:41,895 -	 Bank Account - INFO	 - 10000.0 deposited to 9072 account with balance: 19990.0
+2022-08-06 23:44:10,223 -	 User - INFO	 - 10 Withdraw from 9072 account your current balance: 9990
+2022-08-06 23:44:10,223 -	 User - INFO	 - single_trip card's charge is 10
+2022-08-06 23:44:10,223 -	 User - INFO	 - single_trip card has created
+2022-08-06 23:44:10,223 -	 User - INFO	 - single_trip card added to mehdi mirzaie' wallet
+2022-08-06 23:44:19,214 -	 User - INFO	 - 1000 Withdraw from 9072 account your current balance: 8990
+2022-08-06 23:44:19,214 -	 User - INFO	 - credit card's charge is 1000
+2022-08-06 23:44:19,214 -	 User - INFO	 - credit card has created
+2022-08-06 23:44:19,214 -	 User - INFO	 - credit card added to mehdi mirzaie' wallet
+2022-08-06 23:44:41,846 -	 Trip - INFO	 - The Trip registered
+2022-08-06 23:44:41,847 -	 Trip - INFO	 - you paid 10 for the trip, by single_trip card
+2022-08-06 23:44:41,847 -	 Trip - INFO	 - user: mehdi mirzaie with id: 40 payed the cost of the origin: kermanshah|destination: tehran trip with single_trip card
+2022-08-06 23:44:46,850 -	 Trip - INFO	 - origin: kermanshah|destination: tehran trip has done
+2022-08-06 23:45:05,384 -	 Trip - INFO	 - The Trip registered
+2022-08-06 23:45:05,384 -	 Trip - ERROR	 - ChargeError: this card has been used before
+2022-08-06 23:45:47,278 -	 Trip - INFO	 - The Trip registered
+2022-08-06 23:45:47,278 -	 Trip - INFO	 - credit card's charge is 990
+2022-08-06 23:45:47,278 -	 Trip - INFO	 - you paid 10 for the trip, by credit card
+2022-08-06 23:45:47,278 -	 Trip - INFO	 - user: mehdi mirzaie with id: 40 payed the cost of the origin: tehran|destination: kermanshah trip with credit card
+2022-08-06 23:45:52,286 -	 Trip - INFO	 - origin: tehran|destination: kermanshah trip has done
+2022-08-06 23:46:09,367 -	 Trip - INFO	 - The Trip registered
+2022-08-06 23:46:09,367 -	 Trip - ERROR	 - CardError: You don't have such card

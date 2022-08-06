@@ -223,7 +223,7 @@ while True:
                     else:
                         print("Invalid Key")
                 except Exception as e:
-                    print("We had an Error try again", e)
+                    print("Error:", e, 'try again')
             elif ct == 'B':
                 system('cls')
                 break

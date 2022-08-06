@@ -73,4 +73,3 @@ class Trip:
 # trip3 = Trip('kermanshah', 'tehran', 200, 'mehdi')
 # trip2 = Trip('narmak', 'taleghani', 10, mehdi, 'credit')
 # print(Trip.list_of_trips)
-
