@@ -52,7 +52,7 @@ class Trip:
 
     def travel(self):
         print(f"Traveling from {self.origin} to {self.destination}")
-        sleep(5)
+        sleep(2)
         print(f'Welcome to {self.destination}')
         self.__class__.list_of_trips.append(self)
         logger.info(f"{self} trip has done")
