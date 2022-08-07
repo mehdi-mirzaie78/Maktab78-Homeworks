@@ -19,4 +19,3 @@ ___
 ---
 
 ![Picture1](https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW9/HW9-1.png)
-![Picture1](https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW9/HW9-1.v2.jpg)
