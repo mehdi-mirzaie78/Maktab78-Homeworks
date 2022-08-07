@@ -22,7 +22,7 @@ class TestUser(unittest.TestCase):
 
     def test_login_user(self):
         self.assertRaises(LoginError, self.user1.login_user, '23')
-        self.assertRaises(LoginError, self.user1.login_user, 2)
+        self.assertRaises(LoginError, self.user1.login_user, 21351351235)
         self.assertEqual(User.login_user(self.user1._User__id_code), self.user1)
 
     def test_buy_card(self):
