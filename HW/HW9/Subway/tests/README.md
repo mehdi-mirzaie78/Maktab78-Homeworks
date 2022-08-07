@@ -3,12 +3,9 @@
 ---
 + __Subway package:__ 83% files, 99% lines covered
 
-![](../Result of tests.png)
+![Picture1](https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW9/Subway/tests/Result%20of%20tests.png)
 
-[//]: # (![alt text]&#40;F:\Workspace\Github Workspace\Maktab78-Homeworks\HW\HW9\Subway\Result of tests.png&#41;)
 
 + __models package:__ 100% files, 100% lines covered in 'models'
 
-![](../Result of tests2.png)
-[//]: # (![alt text]&#40;F:\Workspace\Github Workspace\Maktab78-Homeworks\HW\HW9\Subway\Result of tests2.png&#41;)
-[//]: # (![Screenshot]&#40;F:\Workspace\Github Workspace\Maktab78-Homeworks\HW\HW9\Subway\Result of tests2.png&#41;)
+![Picture2](https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW9/Subway/tests/Result%20of%20tests2.png)
