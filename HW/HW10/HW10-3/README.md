@@ -4,7 +4,7 @@
   Once the calculation is done for a part of a program, 
   In the next calculations, program just uses what has calculated before
 + ### Result
-  - #### Using cache makes calculations and process really fast. But only for big values.
+  - #### Using cache makes calculations and process really fast.
 
 
 
