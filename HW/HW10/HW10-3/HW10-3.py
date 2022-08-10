@@ -1,5 +1,5 @@
-from Decorator import process_timer
-from functools import cache
+from Decorator import process_timer, cache
+# from functools import cache
 from sys import setrecursionlimit
 
 
