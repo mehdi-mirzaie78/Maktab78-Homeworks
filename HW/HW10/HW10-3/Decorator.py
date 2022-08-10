@@ -24,4 +24,20 @@ def process_timer(func):
         if res > 100000:
             logger.info(f"<<{func.__name__}>> function - Finished: {dt:f} sec")
         return res
+
+    return wrapper
+
+
+# Creating cache decorator
+def cache(function):
+    memo = {}
+
+    def wrapper(*args):
+        if args in memo:
+            return memo[args]
+        else:
+            rv = function(*args)
+            memo[args] = rv
+            return rv
+
     return wrapper
