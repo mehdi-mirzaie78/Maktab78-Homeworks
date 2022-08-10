@@ -22,6 +22,6 @@ def process_timer(func):
         res = func(*args, **kwargs)
         dt = time() - t
         if res > 100000:
-            logger.info(f"<<{func.__name__}>> function - result = {res} - Finished: {dt:.3f} sec")
+            logger.info(f"<<{func.__name__}>> function - Finished: {dt:f} sec")
         return res
     return wrapper
