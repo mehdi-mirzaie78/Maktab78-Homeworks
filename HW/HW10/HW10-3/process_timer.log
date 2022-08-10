@@ -1,0 +1,5 @@
+2022-08-10 19:13:43,219 - Decorator - <<fibo_cache>> function - Finished: 0.000000 sec 
+2022-08-10 19:13:46,991 - Decorator - <<fibo_no_cache>> function - Finished: 3.771857 sec 
+2022-08-10 19:13:46,996 - Decorator - <<fact_no_cache>> function - Finished: 0.003995 sec 
+2022-08-10 19:13:47,026 - Decorator - <<fact_cache>> function - Finished: 0.006001 sec 
+
