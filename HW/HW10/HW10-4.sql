@@ -1,51 +1,51 @@
 CREATE TABLE "cards"(
-    "user id" INTEGER NOT NULL,
-    "card id" INTEGER NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "card_id" INTEGER NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "charge" INTEGER NOT NULL,
-    "expiration date" DATE NULL
+    "expiration_date" DATE NULL
 );
 ALTER TABLE
-    "cards" ADD PRIMARY KEY("card id");
+    "cards" ADD PRIMARY KEY("card_id");
 COMMENT
 ON COLUMN
     "cards"."name" IS 'Only can be: single card - credit card - term card';
 CREATE TABLE "bankaccount"(
-    "user id" INTEGER NOT NULL,
-    "Account id" INTEGER NOT NULL,
-    "owner's name" VARCHAR(255) NOT NULL,
-    "national code" VARCHAR(255) NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "Account_id" INTEGER NOT NULL,
+    "owner_name" VARCHAR(255) NOT NULL,
+    "national_code" VARCHAR(255) NOT NULL,
     "balance" INTEGER NOT NULL
 );
 ALTER TABLE
-    "bankaccount" ADD PRIMARY KEY("Account id");
+    "bankaccount" ADD PRIMARY KEY("Account_id");
 ALTER TABLE
-    "bankaccount" ADD CONSTRAINT "bankaccount_national code_unique" UNIQUE("national code");
+    "bankaccount" ADD CONSTRAINT "bankaccount_national code_unique" UNIQUE("national_code");
 CREATE TABLE "users"(
-    "user id" INTEGER NOT NULL,
-    "full name" VARCHAR(255) NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "full_name" VARCHAR(255) NOT NULL,
     "age" INTEGER NOT NULL
 );
 ALTER TABLE
     "users" ADD PRIMARY KEY("user id");
 CREATE TABLE "trips"(
-    "user id" INTEGER NOT NULL,
-    "trip id" INTEGER NOT NULL,
-    "card id" INTEGER NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "trip_id" INTEGER NOT NULL,
+    "card_id" INTEGER NOT NULL,
     "origin" VARCHAR(255) NOT NULL,
     "destination" VARCHAR(255) NOT NULL,
     "cost" INTEGER NOT NULL
 );
 ALTER TABLE
-    "trips" ADD PRIMARY KEY("trip id");
+    "trips" ADD PRIMARY KEY("trip_id");
 ALTER TABLE
-    "cards" ADD CONSTRAINT "cards_user id_foreign" FOREIGN KEY("user id") REFERENCES "users"("user id");
+    "cards" ADD CONSTRAINT "cards_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("user_id");
 ALTER TABLE
-    "trips" ADD CONSTRAINT "trips_card id_foreign" FOREIGN KEY("card id") REFERENCES "cards"("card id");
+    "trips" ADD CONSTRAINT "trips_card_id_foreign" FOREIGN KEY("card_id") REFERENCES "cards"("card_id");
 ALTER TABLE
-    "bankaccount" ADD CONSTRAINT "bankaccount_user id_foreign" FOREIGN KEY("user id") REFERENCES "users"("user id");
+    "bankaccount" ADD CONSTRAINT "bankaccount_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("user_id");
 ALTER TABLE
-    "trips" ADD CONSTRAINT "trips_user id_foreign" FOREIGN KEY("user id") REFERENCES "users"("user id");
+    "trips" ADD CONSTRAINT "trips_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("user_id");
 
 
 
@@ -97,3 +97,20 @@ ALTER TABLE
 -- JOIN cards ON cards.card_id=trips.card_id
 -- WHERE cards.card_name='single';
 
+
+-- SELECT * FROM trips;
+
+-- 3
+-- SELECT COUNT(cards.card_name) AS number_of_card_used, trips.user_id, users.full_name
+-- FROM cards
+-- JOIN users ON users.user_id=cards.user_id
+-- JOIN trips ON cards.card_id=trips.card_id
+-- GROUP BY trips.user_id, users.full_name
+-- HAVING COUNT(cards.card_name) > 1;
+
+
+-- 4
+-- SELECT trip_id, trips.origin, trips.destination, users.full_name, cards.card_name, cards.charge
+-- FROM trips
+-- JOIN users ON users.user_id=trips.user_id
+-- JOIN cards ON cards.card_id=trips.card_id;
