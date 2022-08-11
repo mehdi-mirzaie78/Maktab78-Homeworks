@@ -56,21 +56,26 @@ ALTER TABLE
 
 
 -- SELECT * FROM bankaccount;
+-- SELECT * FROM users;
 -- SELECT * FROM trips;
+-- SELECT * FROM cards;
 
 -- INSERT INTO users(user_id, full_name, age)
--- VALUES (1001, 'Reza Amin', 22),
---        (1002, 'Parsa Ahmaripour', 22), 
+-- VALUES (1000, 'Mehdi Mirzaie', 23),
+--        (1001, 'Reza Amin', 22),
+--        (1002, 'Parsa Ahmaripour', 22),
 --        (1003, 'Mti Farokh', 19);
 
 -- INSERT INTO bankaccount(user_id, account_id, owner_name, national_code, balance)
--- VALUES (1001, 2001, 'reza amin', '123445', 50000),
+-- VALUES (1000, 2000, 'mehdi mirzaie', '3242157397', 1000000),
+--        (1001, 2001, 'reza amin', '123445', 50000),
 --        (1002, 2002, 'parsa ahmaripour', '123446', 20000),
 --        (1003, 2003, 'Mti Farokh', '123447', 30000);
 
 
 -- INSERT INTO cards(user_id, card_id, card_name, charge, expiration_date)
--- VALUES (1001, 3001, 'single', 10, NULL),
+-- VALUES (1000, 3000, 'single', 10, NULL),
+--        (1001, 3001, 'single', 10, NULL),
 --        (1001, 3002, 'credit', 100, NULL),
 --        (1001, 3003, 'term', 80, '2022-8-30'),
 --        (1002, 3004, 'single', 10, NULL),
@@ -79,9 +84,6 @@ ALTER TABLE
 --        (1003, 3007, 'single', 10, NULL),
 --        (1003, 3008, 'credit', 220, NULL),
 --        (1003, 3009, 'term', 100, '2022-9-20');
-
-
-
 
 -- 1
 -- SELECT DISTINCT trips.user_id, users.full_name
@@ -97,7 +99,6 @@ ALTER TABLE
 -- JOIN cards ON cards.card_id=trips.card_id
 -- WHERE cards.card_name='single';
 
-
 -- SELECT * FROM trips;
 
 -- 3
@@ -109,8 +110,10 @@ ALTER TABLE
 -- HAVING COUNT(cards.card_name) > 1;
 
 
+
 -- 4
 -- SELECT trip_id, trips.origin, trips.destination, users.full_name, cards.card_name, cards.charge
 -- FROM trips
 -- JOIN users ON users.user_id=trips.user_id
--- JOIN cards ON cards.card_id=trips.card_id;
+-- JOIN cards ON cards.card_id=trips.card_id
+-- ORDER BY trip_id ASC;
