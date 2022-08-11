@@ -16,8 +16,8 @@ class Indenter:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.number -= 1
+        print(exc_type, exc_val, exc_tb)
         return True
-
 
 # Testing
 with Indenter() as indent:
