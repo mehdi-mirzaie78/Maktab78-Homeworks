@@ -25,7 +25,7 @@ JOIN users
 ON users.user_id=trips.user_id;
 ```
 
-![1]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/1.png")
+![]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/1.png")
 
 ---
 
@@ -38,7 +38,7 @@ ON users.user_id=trips.user_id
 JOIN cards ON cards.card_id=trips.card_id
 WHERE cards.card_name='single';
 ```
-![2]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/2.png")
+![]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/2.png")
 
 ---
 
@@ -51,7 +51,7 @@ JOIN trips ON cards.card_id=trips.card_id
 GROUP BY trips.user_id, users.full_name
 HAVING COUNT(cards.card_name) > 1;
 ```
-![3]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/3.png")
+![]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/3.png")
 
 ---
 
@@ -63,6 +63,6 @@ JOIN users ON users.user_id=trips.user_id
 JOIN cards ON cards.card_id=trips.card_id
 ORDER BY trip_id ASC;
 ```
-![4]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/4.png")
+![]("https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/4.png")
 
 
