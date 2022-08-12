@@ -11,7 +11,7 @@
   - Query codes for subway project
   
     1- First I created new ERD.
-      <img src=https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/ERD.png width="800" height="550">
+    ![](https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW10/Pictures/ERD.png)
   
     2- I created a database with some data to work with.
     
