@@ -49,14 +49,14 @@ def fact_cache(num):
     return factorial()
 
 
-print(fibo_cache(35))
-print(fibo_no_cache(35))
+print(f'{fibo_cache(35)=}')
+print(f'{fibo_no_cache(35)=}')
 
 # Because of RecursionError maximum recursion depth exceeded
 setrecursionlimit(20000)
 
-print(fact_no_cache(1500))
-print(fact_cache(1500))
+print(f'{fact_no_cache(500)=}')
+print(f'{fact_cache(500)=}')
 
 # As it is obvious, when we use cache decorator.
 # computer doesn't recalculate repetitive values.
