@@ -1,5 +1,4 @@
 # 2022-08-10 14:05:10.695266
-from builtins import print as p
 
 
 class Indenter:
@@ -8,7 +7,7 @@ class Indenter:
         self.number = -1
 
     def print(self, value):
-        p(self.number * '\t' + str(value))
+        print(self.number * '\t' + str(value))
 
     def __enter__(self):
         self.number += 1
@@ -16,7 +15,6 @@ class Indenter:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.number -= 1
-        # print(exc_type, exc_val, exc_tb)    # Just in case, if we had an error
         return True
 
 
