@@ -1,18 +1,21 @@
 import datetime
+from leap_year import modify, count_leap
 
 
-def modify(date: str) -> tuple:
-    temp = date.split('-')
-    result = tuple(map(int, temp))
-    return result
-
-
-def diff(dt1: str, dt2: str) -> str:
+# Shows difference of two datetime in seconds and years
+# Plus shows the number of changing clock time
+# And show number of leap years with the leap years
+def diff(dt1: str, dt2: str) -> None:
     date1 = datetime.datetime(*modify(dt1))
     date2 = datetime.datetime(*modify(dt2))
     difference = date2 - date1 if date2 > date1 else date1 - date2
-    print(difference)
-    return f"Difference: {difference.seconds + difference.days * 24 * 3600} seconds"
+    years = difference.days // 365
+    print(' Time Difference In Seconds '.center(70, '-'))
+    print(f"Difference(second): {difference.seconds + difference.days * 24 * 3600}"
+          f" - Difference(year): {years}")
+    print(' leap years '.center(70, '-'))
+    count_leap(dt1, dt2)
+    print(f"Number Of Changing Clock Time: {years * 2} times")
 
 
 # dat1 = input('Enter the first date-time with this format YYYY-MM-dd-hh-mm-ss: ')
@@ -21,5 +24,4 @@ def diff(dt1: str, dt2: str) -> str:
 dat1 = '2022-8-17-10-30-20'
 dat2 = '1999-7-21-22-30-53'
 
-print(diff(dat1, dat2))
-# print(diff(dat2, dat1))
+diff(dat1, dat2)
