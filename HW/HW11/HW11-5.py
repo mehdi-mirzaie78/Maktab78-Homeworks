@@ -33,13 +33,13 @@ def gen(dt1: datetime.date, dt2: datetime.date, num: int):
         start_date += datetime.timedelta(days=7)
 
 
-Date1 = datetime.date(2022, 8, 16)
-Date2 = Date1 + datetime.timedelta(days=31)
-number = 6
+# Date1 = datetime.date(2022, 8, 16)
+# Date2 = Date1 + datetime.timedelta(days=31)
+# number = 6
 
-# Date1 = modify(input('Enter the first date: '))
-# Date2 = modify(input('Enter the second date: '))
-# number = int(input('Enter a number in between 0 (saturday) and 6 (friday): '))
+Date1 = modify(input('Enter the first date: '))
+Date2 = modify(input('Enter the second date: '))
+number = int(input('Enter a number in between 0 (saturday) and 6 (friday): '))
 
 for j in gen(Date1, Date2, number):
     print(j)
