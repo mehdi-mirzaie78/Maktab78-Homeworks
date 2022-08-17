@@ -17,12 +17,13 @@ def gen(dt1: datetime.date, dt2: datetime.date, num: int):
     date2 = date_convert(dt2)
     start_date = date1 if date1 < date2 else date2
     end_date = date1 if date1 > date2 else date2
+    weekday = start_date.isoweekday() - 1
+    num_days = abs(weekday - num)
 
-    num_days = abs(start_date.isoweekday() - 1 - num)
-    if start_date.isoweekday() - 1 < num:
+    if weekday < num:
         start_date += datetime.timedelta(days=num_days)
 
-    elif start_date.isoweekday() - 1 > num:
+    elif weekday > num:
         start_date += jdatetime.timedelta(days=7 - num_days)
 
     diff = end_date - start_date
@@ -32,12 +33,13 @@ def gen(dt1: datetime.date, dt2: datetime.date, num: int):
         start_date += datetime.timedelta(days=7)
 
 
-# Date1 = datetime.date(2022, 8, 16)
-# Date2 = Date1 + datetime.timedelta(days=31)
+Date1 = datetime.date(2022, 8, 16)
+Date2 = Date1 + datetime.timedelta(days=31)
+number = 6
 
-Date1 = modify(input('Enter the first date: '))
-Date2 = modify(input('Enter the second date: '))
-number = int(input('Enter a number in between 0 (saturday) and 6 (friday): '))
+# Date1 = modify(input('Enter the first date: '))
+# Date2 = modify(input('Enter the second date: '))
+# number = int(input('Enter a number in between 0 (saturday) and 6 (friday): '))
 
 for j in gen(Date1, Date2, number):
     print(j)
