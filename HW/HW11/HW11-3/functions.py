@@ -1,5 +1,8 @@
 import datetime
+import jdatetime
 
+
+# ############################ Modify ###############################
 
 # Modifies str format of datetime to convert to datetime object
 def modify(date: str) -> tuple:
@@ -7,6 +10,8 @@ def modify(date: str) -> tuple:
     result = tuple(map(int, temp))
     return result
 
+
+# ########################### Leap Year ##############################
 
 # Determines a year is a leap year or not
 def leap(year: int) -> bool:
@@ -20,6 +25,8 @@ def leap(year: int) -> bool:
         return True
 
 
+# ########################## Count Leap #############################
+
 # Counts the leap years and shows which years were leap years
 def count_leap(dt1: str, dt2: str) -> None:
     date1 = datetime.datetime(*modify(dt1))
@@ -32,5 +39,12 @@ def count_leap(dt1: str, dt2: str) -> None:
     result = list(filter(leap, list(range(start, end))))
     print(f"We have {len(result)} leap years:", *result)
 
+
 # leap year: 1992 & 2000
 # print(leap(1900))
+
+# ########################### Date Convert ###########################
+
+def date_convert(dt: datetime):
+    date: datetime.date = dt.date()
+    return jdatetime.date.fromgregorian(day=date.day, month=date.month, year=date.year)
