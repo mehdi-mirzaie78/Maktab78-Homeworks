@@ -19,7 +19,7 @@ body
 {
   position: relative;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1070px;
   min-height: 561px;
   background:  #fff;
   margin: 50px;
@@ -67,7 +67,7 @@ body
 {
   color: #fff;
   font-size: 1.7em;
-  margin-top: 20px;
+  margin-top: 40px;
   text-align: center;
   font-weight: 700;
   line-height: 1em;
@@ -100,6 +100,7 @@ body
   display: inline-block;
   width: 30px;
   height: 30px;
+  text-align: right;
 }
 
 .explanation
@@ -118,4 +119,39 @@ body
   position: relative;
   background: #fff;
   padding: 40px;
+  margin-left: 30px;
+}
+
+.right-side h2
+{
+  margin: 0px;
+  margin-top: 40px;
+  color: #e04679;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+}
+
+
+.right-side .download
+{
+  margin-top: 40px;
+  margin-left: 385px;
+  position: relative;
+  vertical-align: middle;
+  width: 140px;
+  height: 23px;
+  background-color: #4788e0;
+  color: white;
+  border: 1px;
+  border-radius: 2px
+}
+
+.right-side .information
+{
+  margin-top: 40px;
+  width: 642px;
+  line-height: 1.4em;
 }
