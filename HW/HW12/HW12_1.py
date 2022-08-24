@@ -37,7 +37,7 @@ class User:
 
     @phone.setter
     def phone(self, value):
-        phone_pattern = re.compile(r'(\+989|09)+\d{9}')
+        phone_pattern = re.compile(r'^(\+989|09)+\d{9}$')
         if not phone_pattern.match(value):
             raise ValueError("Invalid Phone Number")
         self._phone = value
@@ -46,9 +46,10 @@ class User:
         return f'name: {self.name} email: {self.email} phone number: {self.phone}'
 
 
-try:
-    user = User('Reza', 'reza@email.com', '09188524345')
-except ValueError as ve:
-    print(ve)
-else:
-    print(user)
+if __name__ == '__main__':
+    try:
+        user = User('Reza', 'reza@email.com', '09188524345')
+    except ValueError as ve:
+        print(ve)
+    else:
+        print(user)
