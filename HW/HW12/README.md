@@ -10,3 +10,5 @@
   - Working with __BeautifulSoup__ module and scrape some data from a website storing the results as a json file
 - ### Homework 12-5:
   - Designing a personal portfolio with __HTML-CSS__
+
+<img src="https://github.com/mehdi-mirzaie78/Maktab78-Homeworks/blob/main/HW/HW12/HW12-5/result.jpg">
