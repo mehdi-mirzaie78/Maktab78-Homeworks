@@ -1,6 +1,5 @@
 ## Explanation:
 
----
 - ### Homework 12-1:
   - User class data validation(name, email, phone number)
 - ### Homework 12-2:
