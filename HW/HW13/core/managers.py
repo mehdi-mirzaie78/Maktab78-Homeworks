@@ -11,8 +11,9 @@ class DBManager:
     USER = DB_CONNECTION["USER"]
     PORT = DB_CONNECTION["PORT"]
     PASSWORD = DB_CONNECTION["PASSWORD"]
+    DATABASE = DB_CONNECTION['DATABASE']
 
-    def __init__(self, database, user=USER, host=HOST, port=PORT, password=PASSWORD) -> None:
+    def __init__(self, database=DATABASE, user=USER, host=HOST, port=PORT, password=PASSWORD) -> None:
         self.database = database
         self.user = user
         self.host = host
@@ -44,9 +45,9 @@ class DBManager:
                 curs.execute(f"""INSERT INTO {model_instance.TABLE} ({models_fields_str}) 
                 VALUES ({model_values_str}) RETURNING ID;""", models_values_tuple)
 
-            id = int(curs.fetchone()['id'])
-            setattr(model_instance, 'id', id)
-            return id
+                id = int(curs.fetchone()['id'])
+                setattr(model_instance, 'id', id)
+                return id
 
     def read(self, model_class: type, pk) -> DBModel:
         """returns an instance of the Model with inserted values"""
@@ -81,3 +82,6 @@ class DBManager:
                 model_pk_value = getattr(model_instance, model_instance.PK)
                 curs.execute(f"""DELETE FROM {model_instance.TABLE} WHERE {model_instance.PK} = {model_pk_value};""")
                 delattr(model_instance, 'id')
+
+
+db = DBManager()
