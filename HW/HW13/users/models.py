@@ -21,5 +21,11 @@ class User(DBModel):  # User model
             self.id = id
 
 
-user = User('mehdi', 'mirzaie', 3242157397, 'Mehdi1378', 1000)
-db.create(user)
+# user1 = User('mehdi', 'mirzaie', 3242157397, 'Mehdi1378', 1000, id=5)
+# user2 = User('reza', 'amin', 3242157137, 'Reza1379', 1000)
+# db.create(user1)
+# db.create(user2)
+# db.read(User, 5)
+# db.read(User, 6)
+# db.delete(user1)
+# print(user1.PK)
