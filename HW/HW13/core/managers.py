@@ -3,6 +3,9 @@ import psycopg2.extras
 from core.models import DBModel
 from configs import DB_CONNECTION
 from psycopg2._psycopg import connection, cursor
+from core.utils import logger
+
+logger.name = 'DBManager'
 
 
 class DBManager:
@@ -47,6 +50,7 @@ class DBManager:
 
                 id = int(curs.fetchone()['id'])
                 setattr(model_instance, 'id', id)
+                logger.info(f"Added {model_instance}")
                 return id
 
     def read(self, model_class: type, pk) -> DBModel:
@@ -57,7 +61,9 @@ class DBManager:
             with curs:
                 curs.execute(f"""SELECT * FROM {model_class.TABLE} WHERE {model_class.PK} = {pk};""")
                 res = curs.fetchone()
-                return model_class(**dict(res))
+                obj = model_class(**dict(res))
+                logger.info(f"Fetched from {DBModel.__name__} {obj}")
+                return obj
 
     def update(self, model_instance: DBModel) -> None:
         """update instance in db table by get all model_instance attrs"""
@@ -72,6 +78,7 @@ class DBManager:
                 model_values_tuple = tuple(model_vars.values())
                 curs.execute(f"""UPDATE {model_instance.TABLE} SET {','.join(model_set_values)} 
                 WHERE {model_instance.PK} = {model_pk_value};""", model_values_tuple)
+                logger.info(f"Updated {model_instance}")
 
     def delete(self, model_instance: DBModel) -> None:
         """delete instance method"""
@@ -82,6 +89,6 @@ class DBManager:
                 model_pk_value = getattr(model_instance, model_instance.PK)
                 curs.execute(f"""DELETE FROM {model_instance.TABLE} WHERE {model_instance.PK} = {model_pk_value};""")
                 delattr(model_instance, 'id')
-
+                logger.info(f"Deleted {model_instance}")
 
 db = DBManager()
