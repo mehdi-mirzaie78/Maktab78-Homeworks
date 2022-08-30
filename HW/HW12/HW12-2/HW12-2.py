@@ -4,12 +4,16 @@ import json
 
 class User:
     users_data = {'users': []}
+    users_object = {}
 
     def __init__(self, name: str, email: str, phone: str) -> None:
         self.name = name
         self.email = email
         self.phone = phone
         self.__class__.users_data['users'].append(self.return_dict())
+
+    def __repr__(self):
+        return f'name: {self.name}, email: {self.email}, phone: {self.phone}'
 
     @property
     def name(self):
@@ -57,7 +61,8 @@ class User:
     @classmethod
     def restore_json(cls):
         with open('users.json') as f:
-            cls.users_data = json.load(f)
+            data = json.load(f)
+            cls.users_object = {i['name']: User(**i) for i in data['users']}
 
 
 try:
@@ -68,5 +73,8 @@ except ValueError as ve:
 
 User.save_json()
 User.restore_json()
-print(User.users_data['users'][0]['email'])
-print(User.users_data['users'][1]['email'])
+print(User.users_object['Reza'], type(User.users_object['Reza']))
+print(User.users_object['mehdi'], type(User.users_object['mehdi']))
+
+# Now we have the User objects here.
+# Thanks for your consideration
