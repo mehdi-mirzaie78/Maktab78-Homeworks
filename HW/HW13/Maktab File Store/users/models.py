@@ -1,6 +1,39 @@
 from core.models import DBModel
 from core.managers import db, DBManager
 from users.utils import Validator
+from file.models import File
+from datetime import datetime
+
+
+class ShoppingItem(DBModel):
+    TABLE = 'shopping_item'
+    PK = 'id'
+
+    def __init__(self, user_id, seller_id, file_id, report_id=None, payment_status=False, id=None):
+        self.user_id = user_id
+        self.seller_id = seller_id
+        self.file_id = file_id
+        self.report_id = report_id
+        self.payment_status = payment_status
+        if id:
+            self.id = id
+
+    def register_in_database(self, dbman: DBManager = db):
+        return dbman.create(self)
+
+
+class Reports(DBModel):
+    TABLE = 'reports'
+    PK = 'id'
+
+    def __init__(self, user_id, id=None):
+        self.user_id = user_id
+        self.date = datetime.today().date()
+        if id:
+            self.id = id
+
+    def register_in_database(self, dbman: DBManager = db):
+        return dbman.create(self)
 
 
 class User(DBModel):
@@ -45,6 +78,25 @@ class User(DBModel):
         print(f"Wellcome {user.first_name} {user.last_name}")
         return user
 
+    def buy_files(self, dbman: DBManager = db):
+        File.show_all_files()
+        print('---------------------------------')
+        file_id = int(input('Enter The file_id: '))
+        file = File.get(file_id)
+        seller_id = int(input('Enter The seller_id: '))
+        shopping_item = ShoppingItem(self.id, seller_id, file_id)
+        shopping_item.register_in_database()
+        # So far we have the item and we did not pay the price yet
+        if self.balance < file.price:
+            raise ValueError("NOT Enough Balance!")
+        self.balance -= file.price
+        dbman.update(self)
+        shopping_item.payment_status = True
+
+        report = Reports(self.id)
+        shopping_item.report_id = report.register_in_database()
+        dbman.update(shopping_item)
+        print('Transaction Successfully')
 
 class Seller(DBModel):
     TABLE = 'seller'
@@ -87,7 +139,6 @@ class Seller(DBModel):
 # user2 = User('reza', 'amin', 3242157137, 'Reza1379', 1000)
 # db.create(user1)
 # db.create(user2)
-# db.read(User, 5)
 # db.read(User, 6)
 # db.delete(user1)
 # print(user1.PK)
