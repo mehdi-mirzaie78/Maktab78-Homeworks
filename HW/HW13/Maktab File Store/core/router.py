@@ -21,30 +21,29 @@ class Route:
         ...
     """
 
-    def __init__(self, name, description=None, callback: CallBack = None, children=()) -> None:
+    def __init__(self, name, description=None, callback: CallBack = None, children=None) -> None:
         self.name = name
         self.description = description
         self.callback = callback
-        # ...
-        if not callback: self.children = children
+        self.children = children
 
     def run(self):
-        # ...
+        print(self.description) if self.description is not None else print()
+
+        if self.callback:
+            self.callback: CallBack
+            self.callback.call()
+
         if children := self.children:
             for child in children:
                 child: Route
                 print(f"{children.index(child) + 1}. {child.name}")
 
-            index = int(input("\n>> ")) - 1
+            index = int(input("\n =>> ")) - 1
             # ...
 
             children[index]: Route
             children[index].run()
-
-        else:
-            # ...
-            self.callback: CallBack
-            self.callback.call()
 
 
 class Router:
@@ -59,4 +58,3 @@ class Router:
     def generate(self) -> None:
         clear()
         self.route.run()
-        # ...
