@@ -65,6 +65,30 @@ class DBManager:
                 logger.info(f"Fetched from {DBModel.__name__} {obj}")
                 return obj
 
+    def read_with_condition(self, model_class: type, attribute, value) -> list[DBModel]:
+        """returns an instance of the Model with inserted values"""
+        assert issubclass(model_class, DBModel)
+        with self.conn:
+            curs = self.__get_cursor()
+            with curs:
+                curs.execute(f"""SELECT * FROM {model_class.TABLE} WHERE {attribute} = {value};""")
+                res = curs.fetchall()
+                obj_list = [model_class(**fetch) for fetch in res]
+                return obj_list
+
+    def read_all_data(self, model_class: type) -> list[DBModel]:
+        """returns an instance of the Model with inserted values"""
+        assert issubclass(model_class, DBModel)
+        with self.conn:
+            curs = self.__get_cursor()
+            with curs:
+                curs.execute(f"""SELECT * FROM {model_class.TABLE};""")
+                res = curs.fetchall()
+                obj_list = [model_class(**fetch) for fetch in res]
+                return obj_list
+
+
+
     def update(self, model_instance: DBModel) -> None:
         """update instance in db table by get all model_instance attrs"""
 
