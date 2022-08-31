@@ -35,6 +35,16 @@ class User(DBModel):
         user = User(firstname, lastname, national_id, password, balance, phone, age)
         user.register_in_database()
 
+    @classmethod
+    def login_user(cls, dbman: DBManager = db):
+        user_id = int(input("Enter User ID: "))
+        password = input('Enter Password: ')
+        user = dbman.read(cls, user_id)
+        if user.password != password:
+            raise ValueError("Wrong Password!")
+        print(f"Wellcome {user.first_name} {user.last_name}")
+        return user
+
 
 class Seller(DBModel):
     TABLE = 'seller'
@@ -58,8 +68,17 @@ class Seller(DBModel):
         seller = Seller(firstname, lastname, password)
         seller.register_in_database()
 
+    @classmethod
+    def login_seller(cls, dbman: DBManager = db):
+        seller_id = int(input("Enter Seller ID: "))
+        password = input('Enter Password: ')
+        seller: "Seller" = dbman.read(cls, seller_id)
+        if seller.password != password:
+            raise ValueError("Wrong Password!")
+        print(f"Wellcome {seller.first_name} {seller.last_name}")
+        return seller
 
-
+# print(User.login_user())
 # seller1 = Seller('mahdi', 'farokhi', 'Mahdi1380')
 # seller1.register()
 
