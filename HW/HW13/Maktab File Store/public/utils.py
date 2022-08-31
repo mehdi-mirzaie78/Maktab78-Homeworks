@@ -15,9 +15,15 @@ def register_user():
     User.register()
 
 
+def login_user():
+    user = User.login_user()
+    if input('For Buying Files press Enter: ') == '':
+        user.buy_files()
+
+
 def register_seller():
     Seller.register()
 
 
-def login_user():
-    User.login_user()
+def login_seller():
+    Seller.login_seller()
