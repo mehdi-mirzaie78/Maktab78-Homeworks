@@ -32,7 +32,8 @@ class Route:
         print(self.description) if self.description is not None else print()
 
         if self.parent:
-            control = input('[C]: Continue\n[B]: Back\n[E]: Exit\n => ').upper()
+            print(self.name)
+            control = input(f'[C]: Continue to {self.name}\n[B]: Back to {self.parent.name}\n[E]: Exit\n => ').upper()
             if control == 'C':
                 pass
             elif control == 'B':
@@ -48,6 +49,7 @@ class Route:
 
         if children := self.children:
             for child in children:
+                child.parent = self
                 child: Route
                 print(f"{children.index(child) + 1}. {child.name}")
 
@@ -58,7 +60,7 @@ class Route:
             children[index].run()
 
         if self.parent:
-            control = input('[B]: Back\n[E]: Exit\n => ').upper()
+            control = input(f'[B]: Back to {self.parent.name}\n[E]: Exit\n => ').upper()
             if control == 'B':
                 self.parent.run()
             elif control == 'E':
