@@ -91,4 +91,5 @@ class DBManager:
                 delattr(model_instance, 'id')
                 logger.info(f"Deleted {model_instance}")
 
+
 db = DBManager()
