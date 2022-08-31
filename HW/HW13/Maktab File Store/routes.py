@@ -1,18 +1,26 @@
 from core.router import Router, Route, CallBack
 
+# ################################# Users ####################################
 register_user = Route("Register Users", "Register Users Description...",
                       callback=CallBack("public.utils", "register_user"))
 
+login_user = Route("Login Users", "Login Users Description...",
+                   callback=CallBack("public.utils", "login_user"))
+
+users = Route("Users", children=(register_user, login_user))
+
+# ################################# Sellers ####################################
 register_seller = Route("Register Sellers", "Register Sellers Description ...",
                         callback=CallBack("public.utils", "register_seller"))
 
-register_users = Route("Register Sellers and Users", children=(register_user, register_user))
+login_seller = Route("Login Seller", callback=CallBack("public.utils", "login_seller"))
 
-login_user = Route("Login User", callback=CallBack("public.utils", "login_user"))
+sellers = Route("Sellers", children=(register_seller, login_seller))
 
+# ################################# ABOUT US ####################################
 about_us = Route("About us", callback=CallBack("public.utils", "about_us"))
 
-main_menu = Route("Main Menu", "Main menu description ...", children=(about_us, register_user, login_user))
+main_menu = Route("Main Menu", "Main menu description ...", children=(about_us, users, sellers))
 
 router = Router("File Store Router", main_menu)
 
