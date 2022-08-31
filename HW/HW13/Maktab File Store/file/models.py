@@ -28,6 +28,10 @@ class File(DBModel):
         file.register_in_database()
 
     @classmethod
+    def get(cls, file_id, dbman: DBManager = db):
+        return dbman.read(cls, file_id)
+
+    @classmethod
     def show_all_files(cls, dbman: DBManager = db):
         files = dbman.read_all_data(cls)
         for file in files:
