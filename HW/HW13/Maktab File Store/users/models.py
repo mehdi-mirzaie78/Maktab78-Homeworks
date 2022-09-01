@@ -145,6 +145,16 @@ class Seller(DBModel):
         print(f"Wellcome {seller.first_name} {seller.last_name}")
         return seller
 
+    def create_files(self):
+        while True:
+            File.create(self.id)
+            c = input('[C]: Create Another\n[F]: Finished\n =>> ').upper()
+            if c == 'C':
+                pass
+            elif c == 'F':
+                break
+            else:
+                print('Invalid Input!')
 # print(User.login_user())
 # seller1 = Seller('mahdi', 'farokhi', 'Mahdi1380')
 # seller1.register()
