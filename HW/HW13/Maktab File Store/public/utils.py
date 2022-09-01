@@ -23,9 +23,19 @@ def login_user(*args):
     return User.login_user()
 
 
-def buy_files(*args: User):
-    user = args[0]
+def buy_files(*args):
+    user: User = args[0]
     user.buy_files()
+
+
+def charge_account_balance(*args):
+    user: User = args[0]
+    user.charge_account_balance()
+
+
+def update_info(*args):
+    user: User = args[0]
+    user.update_information()
 
 
 def register_seller(*args):
