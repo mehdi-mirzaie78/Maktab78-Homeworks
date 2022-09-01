@@ -155,6 +155,11 @@ class Seller(DBModel):
                 break
             else:
                 print('Invalid Input!')
+
+
+    def show_my_files(self):
+        File.show_seller_files(self.id)
+
 # print(User.login_user())
 # seller1 = Seller('mahdi', 'farokhi', 'Mahdi1380')
 # seller1.register()
