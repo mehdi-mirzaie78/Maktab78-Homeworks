@@ -111,7 +111,24 @@ class User(DBModel):
                 shopping_item.report_id = report_id
                 dbman.update(shopping_item)
         else:
-            print('Transaction Successfully')
+            print('Transaction Has Done Successfully')
+
+    def charge_account_balance(self, dbman: DBManager = db):
+        value = int(input('Amount: '))
+        if value <= 0:
+            raise ValueError("Money can't be zero and negative for charging your acount balance")
+        self.balance += value
+        dbman.update(self)
+        print('Transaction Has Done Successfully')
+
+    def update_information(self, dbman: DBManager = db):
+        self.first_name = input("First Name: ")
+        self.last_name = input("Last Name: ")
+        self.password = input("Password: ")
+        self.phone = input("Phone Number: (Skip: Press Enter) ")
+        self.age = input("Age: (Skip: Press Enter) ")
+        db.update(self)
+
 
 class Seller(DBModel):
     TABLE = 'seller'
@@ -155,7 +172,6 @@ class Seller(DBModel):
                 break
             else:
                 print('Invalid Input!')
-
 
     def show_my_files(self):
         File.show_seller_files(self.id)
