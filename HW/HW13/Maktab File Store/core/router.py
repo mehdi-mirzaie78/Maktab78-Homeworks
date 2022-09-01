@@ -13,7 +13,7 @@ class CallBack:
         self.kwargs = kwargs
 
     def call(self):
-        self.function(*self.args, **self.kwargs)
+        return self.function(*self.args, **self.kwargs)
 
 
 class Route:
@@ -21,20 +21,22 @@ class Route:
         ...
     """
 
-    def __init__(self, name, description=None, callback: CallBack = None, children=None, parent=None) -> None:
+    def __init__(self, name, description=None, callback: CallBack = None, children=None, parent=None,
+                 result=(None,)) -> None:
         self.name = name
         self.description = description
         self.callback = callback
         self.children = children
         self.parent = parent
+        self.result = result
 
     def run(self):
         print(self.description) if self.description is not None else print()
 
         if self.parent:
             print(self.name)
-            control = input(f'[C]: Continue to {self.name}\n[B]: Back to {self.parent.name}\n[E]: Exit\n => ').upper()
-            if control == 'C':
+            control = input(f'[P]: Proceed to {self.name}\n[B]: Back to {self.parent.name}\n[E]: Exit\n => ').upper()
+            if control == 'P':
                 pass
             elif control == 'B':
                 self.parent.run()
@@ -45,11 +47,13 @@ class Route:
 
         if self.callback:
             self.callback: CallBack
-            self.callback.call()
+            self.result = self.callback.call()
 
         if children := self.children:
             for child in children:
                 child.parent = self
+                if child.callback:
+                    child.callback.args = (self.result,)
                 child: Route
                 print(f"{children.index(child) + 1}. {child.name}")
 
