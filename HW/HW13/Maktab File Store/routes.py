@@ -6,8 +6,12 @@ register_user = Route("Register Users", "Register Users Description...",
 
 buy_files = Route("Buy Files", callback=CallBack("public.utils", "buy_files"))
 
+charge_balance = Route("Charge Account Balance", callback=CallBack("public.utils", "charge_account_balance"))
+
+update_info = Route("Update Information", callback=CallBack("public.utils", "update_info"))
+
 login_user = Route("Login Users", "Login Users Description...",
-                   callback=CallBack("public.utils", "login_user"), children=(buy_files,))
+                   callback=CallBack("public.utils", "login_user"), children=(buy_files, charge_balance, update_info))
 
 users = Route("Users", children=(register_user, login_user))
 
