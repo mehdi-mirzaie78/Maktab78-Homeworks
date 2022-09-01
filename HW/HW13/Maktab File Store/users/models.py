@@ -79,24 +79,39 @@ class User(DBModel):
         return user
 
     def buy_files(self, dbman: DBManager = db):
-        File.show_all_files()
-        print('---------------------------------')
-        file_id = int(input('Enter The file_id: '))
-        file = File.get(file_id)
-        seller_id = int(input('Enter The seller_id: '))
-        shopping_item = ShoppingItem(self.id, seller_id, file_id)
-        shopping_item.register_in_database()
-        # So far we have the item and we did not pay the price yet
-        if self.balance < file.price:
-            raise ValueError("NOT Enough Balance!")
-        self.balance -= file.price
-        dbman.update(self)
-        shopping_item.payment_status = True
+        list_of_items = []
+        while True:
+            File.show_all_files()
+            print('---------------------------------')
+            file_id = int(input('Enter The file_id: '))
+            file = File.get(file_id)
+            seller_id = int(input('Enter The seller_id: '))
+            shopping_item = ShoppingItem(self.id, seller_id, file_id)
+            shopping_item.register_in_database()
+            # So far we have the item and we did not pay the price yet
+            if self.balance < file.price:
+                print("NOT Enough Balance!")
+                break
+            self.balance -= file.price
+            dbman.update(self)
+            shopping_item.payment_status = True
+            list_of_items.append(shopping_item)
+            control_key = input('[C]:Continue\n[F]:Finished\n =>> ').upper()
+            if control_key == 'C':
+                pass
+            elif control_key == 'F':
+                break
+            else:
+                print('Invalid Input!')
 
         report = Reports(self.id)
-        shopping_item.report_id = report.register_in_database()
-        dbman.update(shopping_item)
-        print('Transaction Successfully')
+        report_id = report.register_in_database()
+        for shopping_item in list_of_items:
+            if shopping_item.payment_status:
+                shopping_item.report_id = report_id
+                dbman.update(shopping_item)
+        else:
+            print('Transaction Successfully')
 
 class Seller(DBModel):
     TABLE = 'seller'
@@ -134,7 +149,8 @@ class Seller(DBModel):
 # seller1 = Seller('mahdi', 'farokhi', 'Mahdi1380')
 # seller1.register()
 
-# user1 = User('mehdi', 'mirzaie', 3242157397, 'Mehdi1378', 1000, id=5)
+# user1 = User('mehdi', 'mirzaie', 3242157397, 'Mehdi1378', 100000, id=5)
+# db.update(user1)
 # user1.register()
 # user2 = User('reza', 'amin', 3242157137, 'Reza1379', 1000)
 # db.create(user1)
