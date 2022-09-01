@@ -2,7 +2,7 @@ from configs import INFO as information
 from users.models import User, Seller
 
 
-def about_us():
+def about_us(*args):
     print(
         f"""Store name : {information["name"]}
 Description : {information["description"]}
@@ -11,19 +11,36 @@ Version : {information["version"]}
     )
 
 
-def register_user():
+def _exit(*args):
+    exit()
+
+
+def register_user(*args):
     User.register()
 
 
-def login_user():
-    user = User.login_user()
-    if input('For Buying Files press Enter: ') == '':
-        user.buy_files()
+def login_user(*args):
+    return User.login_user()
 
 
-def register_seller():
+def buy_files(*args: User):
+    user = args[0]
+    user.buy_files()
+
+
+def register_seller(*args):
     Seller.register()
 
 
-def login_seller():
-    Seller.login_seller()
+def login_seller(*args):
+    return Seller.login_seller()
+
+
+def create_files(*args):
+    seller: Seller = args[0]
+    seller.create_files()
+
+
+def show_my_files(*args):
+    seller: Seller = args[0]
+    seller.show_my_files()
