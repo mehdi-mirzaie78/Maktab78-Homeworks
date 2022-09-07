@@ -21,6 +21,10 @@ class ShoppingItem(DBModel):
     def register_in_database(self, dbman: DBManager = db):
         return dbman.create(self)
 
+    @classmethod
+    def read_all(cls, dbman: DBManager = db):
+        return db.read_all_data(cls)
+
 
 class Reports(DBModel):
     TABLE = 'reports'
@@ -129,6 +133,21 @@ class User(DBModel):
         self.age = input("Age: (Skip: Press Enter) ")
         db.update(self)
 
+    def show_user_files(self, dbman: DBManager = db):
+        query = f"""SELECT filename, files.size, path, price FROM users
+                JOIN shopping_item ON shopping_item.user_id = users.id
+                JOIN files ON files.id = shopping_item.file_id
+                WHERE user_id = {self.id};"""
+        results = db.query(query)
+        for item in results:
+            print(item)
+
+    def delete_account(self, dbman: DBManager = db):
+
+        # This part is for the users who don't have any files
+        db.delete(self)
+        print('Your Account Has Deleted Successfully!')
+
 
 class Seller(DBModel):
     TABLE = 'seller'
@@ -175,17 +194,3 @@ class Seller(DBModel):
 
     def show_my_files(self):
         File.show_seller_files(self.id)
-
-# print(User.login_user())
-# seller1 = Seller('mahdi', 'farokhi', 'Mahdi1380')
-# seller1.register()
-
-# user1 = User('mehdi', 'mirzaie', 3242157397, 'Mehdi1378', 100000, id=5)
-# db.update(user1)
-# user1.register()
-# user2 = User('reza', 'amin', 3242157137, 'Reza1379', 1000)
-# db.create(user1)
-# db.create(user2)
-# db.read(User, 6)
-# db.delete(user1)
-# print(user1.PK)
