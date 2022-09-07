@@ -39,8 +39,10 @@ about_us = Route("About us", callback=CallBack("public.utils", "about_us"))
 _exit = Route("Exit", callback=CallBack("public.utils", "_exit"))
 
 # ################################# MAIN MENU ###################################
+show_all_files = Route("Show All Files", callback=CallBack("public.utils", "show_all_files"))
+
 main_menu = Route("Main Menu", "Main menu description\n",
-                  children=(about_us, users, sellers, _exit))
+                  children=(show_all_files, about_us, users, sellers, _exit))
 
 # Creating router for menu
 router = Router("File Store Router", main_menu)
