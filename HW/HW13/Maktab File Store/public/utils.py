@@ -38,6 +38,17 @@ def update_info(*args):
     user.update_information()
 
 
+def show_user_files(*args):
+    user: User = args[0]
+    user.show_user_files()
+
+
+def delete_account(*args):
+    user: User = args[0]
+    user.delete_account()
+
+
+##########################################################
 def register_seller(*args):
     Seller.register()
 
