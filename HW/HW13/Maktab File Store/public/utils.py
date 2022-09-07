@@ -1,5 +1,6 @@
 from configs import INFO as information
 from users.models import User, Seller
+from file.models import File
 
 
 def about_us(*args):
@@ -9,6 +10,10 @@ Description : {information["description"]}
 Version : {information["version"]}
 """
     )
+
+
+def show_all_files(*args):
+    File.show_all_files()
 
 
 def _exit(*args):
