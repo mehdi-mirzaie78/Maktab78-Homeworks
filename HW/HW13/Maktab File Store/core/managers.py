@@ -87,7 +87,13 @@ class DBManager:
                 obj_list = [model_class(**fetch) for fetch in res]
                 return obj_list
 
-
+    def query(self, command):
+        with self.conn:
+            curs = self.__get_cursor()
+            with curs:
+                curs.execute(command)
+                result = curs.fetchall()
+                return result
 
     def update(self, model_instance: DBModel) -> None:
         """update instance in db table by get all model_instance attrs"""
@@ -113,7 +119,7 @@ class DBManager:
                 model_pk_value = getattr(model_instance, model_instance.PK)
                 curs.execute(f"""DELETE FROM {model_instance.TABLE} WHERE {model_instance.PK} = {model_pk_value};""")
                 delattr(model_instance, 'id')
-                logger.info(f"Deleted {model_instance}")
+                logger.info(f"{model_instance} has deleted.")
 
 
 db = DBManager()
