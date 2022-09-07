@@ -10,8 +10,13 @@ charge_balance = Route("Charge Account Balance", callback=CallBack("public.utils
 
 update_info = Route("Update Information", callback=CallBack("public.utils", "update_info"))
 
+show_user_files = Route("Show My Files", callback=CallBack("public.utils", "show_user_files"))
+
+delete_account = Route("Delete Account", callback=CallBack("public.utils", "delete_account"))
+
 login_user = Route("Login Users", "Login Users Description...",
-                   callback=CallBack("public.utils", "login_user"), children=(buy_files, charge_balance, update_info))
+                   callback=CallBack("public.utils", "login_user"),
+                   children=(buy_files, charge_balance, show_user_files, update_info, delete_account))
 
 users = Route("Users", children=(register_user, login_user))
 
@@ -34,7 +39,7 @@ about_us = Route("About us", callback=CallBack("public.utils", "about_us"))
 _exit = Route("Exit", callback=CallBack("public.utils", "_exit"))
 
 # ################################# MAIN MENU ###################################
-main_menu = Route("Main Menu", "< Main menu description >\n",
+main_menu = Route("Main Menu", "Main menu description\n",
                   children=(about_us, users, sellers, _exit))
 
 # Creating router for menu
